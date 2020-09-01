@@ -1,0 +1,64 @@
+{
+    "transaction": [
+        {
+            "id": 1,
+            "category": "Food",
+            "price": 7.80,
+            "gain": false
+        },
+        {
+            "id": 2,
+            "category": "Food",
+            "price": 9.00,
+            "gain": false
+        },
+        {
+            "id": 3,
+            "category": "Entertainment",
+            "price": 9.00,
+            "gain": false
+        },
+        {
+            "id": 4,
+            "category": "Income",
+            "price": 500,
+            "gain": true
+        },
+        {
+            "id": 5,
+            "category": "Food",
+            "price": 9.00,
+            "gain": false
+        },
+        {
+            "id": 6,
+            "category": "Transportation",
+            "price": 70.00,
+            "gain": false
+        },
+        {
+            "id": 7,
+            "category": "Groceries",
+            "price": 35.00,
+            "gain": false
+        },
+        {
+            "id": 8,
+            "category": "Health & Wellness",
+            "price": 60.00,
+            "gain": false
+        },
+        {
+            "id": 9,
+            "category": "Shopping",
+            "price": 450.00,
+            "gain": false
+        },
+        {
+            "id": 10,
+            "category": "Travel",
+            "price": 7059.00,
+            "gain": false
+        }
+    ]
+}
