@@ -4,4 +4,6 @@ Rails.application.routes.draw do
   post '/users', to: 'users#create'
   patch '/users/:username', to: 'users#update'
   delete '/users/:username', to: 'users#destroy'
+
+  get '/transactions/:username/:month', to: 'transactions#index'
 end
