@@ -1,0 +1,31 @@
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    display:flex;
+    flex-direction:column;
+}
+
+.nav-bar {
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.body{
+    display:flex;
+    flex-direction: row;
+}
+
+#data-container{
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    width: 600px;
+    height: 600px;
+}
+.login {
+    margin-left: auto;
+    margin-right:auto;
+}

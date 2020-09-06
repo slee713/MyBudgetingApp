@@ -7,45 +7,51 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
 </head>
 <body>
-    <div class = "header">
-        <h1>My Budgeting App</h1>
-        <div class = "nav-bar">
+    <div class="container">
+        <div class = "header">
+            <h1>My Budgeting App</h1>
+        </div> 
+        <div class = "nav-bar" style= "display: none;">
             <div>Home</div>
             <div>Logout</div>
         </div>
-    </div> 
-    <div class = "body">
-        <div class= "login" id="login-container">
-            <h4 class= "login">Please Enter Your Username</h4>
-            <form class= "login" id="login-form">
-                <input id="username">
-                <button type="submit">Login</button>
-            </form>
-        </div>
-        <div id="data-container" style="display: none;">
-            <div id="filter-select-container">
-                <label for="months">Filter By Month:</label>
-                <select name="months" id="filter-month" >
-                    <option>Select A Month</option>
-                    <option value='01'>January</option>
-                    <option value='02'>February</option>
-                    <option value='03'>March</option>
-                    <option value='04'>April</option>
-                    <option value='05'>May</option>
-                    <option value='06'>June</option>
-                    <option value='07'>July</option>
-                    <option value='08'>August</option>
-                    <option value='09'>September</option>
-                    <option value='10'>October</option>
-                    <option value='11'>November</option>
-                    <option value='12'>December</option>
-                </select>
+        <div class = "body">
+            <div class= "login" id="login-container">
+                <h4 >Please Enter Your Username</h4>
+                <form id="login-form">
+                    <input id="username">
+                    <button type="submit">Login</button>
+                </form>
             </div>
-            <div id="chart-container">
-                <canvas id="myChart" ></canvas>
+            <div id="data-container" style="display: none;">
+                <div id="filter-select-container">
+                    <label for="months">Filter By Month:</label>
+                    <select name="months" id="filter-month" >
+                        <option>Select A Month</option>
+                        <option value='01'>January</option>
+                        <option value='02'>February</option>
+                        <option value='03'>March</option>
+                        <option value='04'>April</option>
+                        <option value='05'>May</option>
+                        <option value='06'>June</option>
+                        <option value='07'>July</option>
+                        <option value='08'>August</option>
+                        <option value='09'>September</option>
+                        <option value='10'>October</option>
+                        <option value='11'>November</option>
+                        <option value='12'>December</option>
+                    </select>
+                </div>
+                <div id="chart-container">
+                    <canvas id="myChart" ></canvas>
+                </div>
             </div>
-        </div>
-    </div> 
+            <div class="table">
+                <div id="table-filter"></div>
+                <div id="table-data"></div>
+            </div>
+        </div> 
+    </div>
 	<script type="text/javascript" src="index.js"></script>
 </body>
 </html>

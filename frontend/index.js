@@ -3,7 +3,8 @@ let loginForm = document.getElementById("login-form")
 let loginContainger = document.getElementById("login-container")
 let dataContainer = document.getElementById("data-container")
 let chartDiv = document.querySelector("#chart-container")
-
+let tableContainer = document.getElementById("div.table")
+let navBar = document.querySelector("div.nav-bar")
 //url
 let url = "http://localhost:3000/users/"
 let transactions = "http://localhost:3000/transactions/"
@@ -12,7 +13,8 @@ let transactions = "http://localhost:3000/transactions/"
 loginForm.addEventListener("submit", () => {
     event.preventDefault()
     loginContainger.style.display = "none"
-    dataContainer.style.display = "block"
+    navBar.style.display = "flex"
+    dataContainer.style.display = "flex"
     username = event.target[0].value
     fetch(url+username)
     .then(resp => resp.json())
@@ -51,6 +53,7 @@ function loadUserData(transactions){
         let total = prices.reduce((acc, current_value) => acc + current_value)
         costs.push(round(total,2))
     })
+    let summary = round(costs.reduce((acc, current) => acc + current),2)
     let budgetPieChart = new Chart(myChart, {
         type: 'pie',
         data: {
@@ -77,10 +80,10 @@ function loadUserData(transactions){
         options: {
             title:{
                 display: true,
-                text: 'Spending Summary',
+                text: `Spending Summary - Total: $${summary}`,
                 fonstSize: 70
             },
-            maintainAspectRatio: false,
+            // maintainAspectRatio: false,
             legend:{
                 display: true,
                 position: 'right',
@@ -102,5 +105,7 @@ function loadUserData(transactions){
         }
     })
 }                    
+
+
 
 
