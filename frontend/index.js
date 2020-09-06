@@ -8,7 +8,7 @@ let chartDiv = document.querySelector("#chart-container")
 let url = "http://localhost:3000/users/"
 let transactions = "http://localhost:3000/transactions/"
 
-//load chart based on c
+//load chart based on user data
 loginForm.addEventListener("submit", () => {
     event.preventDefault()
     loginContainger.style.display = "none"
@@ -19,6 +19,7 @@ loginForm.addEventListener("submit", () => {
     .then(userData => loadUserData(userData.transactions))
 })
 
+//load data for specific month for the user
 let filterMonth = document.getElementById("filter-month")
 filterMonth.addEventListener("change", ()=>{
     let month = event.target.value
@@ -29,12 +30,12 @@ filterMonth.addEventListener("change", ()=>{
     })
 })
 
-
+//round values from api data
 function round(value, decimals){
     return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
 }
     
-    
+//grab transaction category info and costs and load into chart
 function loadUserData(transactions){
     let canvas = document.querySelector("canvas")
     canvas.remove()
@@ -50,10 +51,6 @@ function loadUserData(transactions){
         let total = prices.reduce((acc, current_value) => acc + current_value)
         costs.push(round(total,2))
     })
-    // Global Options
-    // Chart.defaults.global.defaultFontFamily = 'Lato';
-    // Chart.defaults.global.defaultFontSize = 18;
-    // Chart.defaults.global.defaultFontColor = '#777';
     let budgetPieChart = new Chart(myChart, {
         type: 'pie',
         data: {

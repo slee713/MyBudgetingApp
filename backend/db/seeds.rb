@@ -12,12 +12,12 @@ steven = User.create(username: "slee713")
 categories = ["Food & Drink", "Shopping", "Travel", "Transportation", "Bills", "Health", "Entertainment", "Groceries"]
 
 150.times do 
-    Transaction.create(user: steven, category: categories.sample, price: rand(0.00...100.00).round(2), date_of_transaction: Date.parse("2020/#{rand(01..12)}/#{rand(1..20)}"))
+    Transaction.create(user: steven, category: categories.sample, price: rand(0.00...100.00).round(2), date_of_transaction: Date.parse("2020/#{rand(01..8)}/#{rand(1..20)}"))
 end
 
 
 michael = User.create(username: "mike")
 
 150.times do 
-    Transaction.create(user: michael, category: categories.sample, price: rand(0.00...100.00).round(2), date_of_transaction: Date.parse("2020/#{rand(01..12)}/#{rand(1..20)}"))
+    Transaction.create(user: michael, category: categories.sample, price: rand(0.00...100.00).round(2), date_of_transaction: Date.parse("2020/#{rand(01..8)}/#{rand(1..20)}"))
 end
