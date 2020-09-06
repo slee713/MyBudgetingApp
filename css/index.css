@@ -47,6 +47,6 @@
 }
 
 .add-transaction-form{
-    flex-direction:row;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-evenly;
 }

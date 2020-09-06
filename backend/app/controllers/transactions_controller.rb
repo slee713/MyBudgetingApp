@@ -20,4 +20,25 @@ class TransactionsController < ApplicationController
         transactions = user.transactions.paginate(page: params[:page], per_page: 20)
         render json: transactions
     end
+
+    def create
+        user = User.find_by(username: params[:username])
+        transaction = Transaction.create(
+            user: user,
+            category: params[:transaction][:category],
+            price: params[:transaction][:price],
+            date_of_transaction: params[:transaction][:date_of_transaction],
+            description: params[:transaction][:description]
+        )
+        transactions = user.transactions
+        render json: transactions
+    end
+
+
+    private
+
+    def transaction_params
+        params.require(:transaction).permit(:category, :price, :description, :date_of_transaction)
+    end
+
 end

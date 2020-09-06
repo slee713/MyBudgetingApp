@@ -179,24 +179,29 @@ addTransaction.addEventListener("click", ()=>{
     }
 })
 
-transactionForm.addEventListener("submit", ()=> {
-    event.preventDefault();
-    let date_of_transaction = event.target[0].value
-    let category = event.target[1].value
-    let description = event.target[2].value
-    let price = parseFloat(event.target[3].value, 10)
-    config = {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json"
-        },
-        body: JSON.stringify({
-            date_of_transaction,
-            category,
-            description,
-            price
-        })
-    }
-    fetch()
-})
+// transactionForm.addEventListener("submit", ()=> {
+//     event.preventDefault();
+//     let date_of_transaction = event.target[0].value
+//     let category = event.target[1].value
+//     let description = event.target[2].value
+//     let price = parseFloat(event.target[3].value, 10)
+//     config = {
+//         method: "POST",
+//         headers: {
+//             "Content-Type": "application/json",
+//             "Accept": "application/json"
+//         },
+//         body: JSON.stringify({
+//             date_of_transaction,
+//             category,
+//             description,
+//             price
+//         })
+//     }
+//     fetch(transactions+username, config)
+//     .then(resp => resp.json())
+//     .then(updatedUserData => {
+//         loadUserData(updatedUserData.transactions)
+//         fetchTable(page)
+//     })
+// })
