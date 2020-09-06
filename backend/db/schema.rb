@@ -14,6 +14,7 @@ ActiveRecord::Schema.define(version: 2020_09_05_163354) do
 
   create_table "transactions", force: :cascade do |t|
     t.integer "user_id"
+    t.string "description"
     t.string "category"
     t.float "price"
     t.date "date_of_transaction"

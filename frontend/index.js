@@ -3,8 +3,10 @@ let loginForm = document.getElementById("login-form")
 let loginContainger = document.getElementById("login-container")
 let dataContainer = document.getElementById("data-container")
 let chartDiv = document.querySelector("#chart-container")
-let tableContainer = document.getElementById("div.table")
+let tableContainer = document.querySelector("div.table")
 let navBar = document.querySelector("div.nav-bar")
+let table = document.querySelector("#table")
+let page = 1
 //url
 let url = "http://localhost:3000/users/"
 let transactions = "http://localhost:3000/transactions/"
@@ -15,10 +17,13 @@ loginForm.addEventListener("submit", () => {
     loginContainger.style.display = "none"
     navBar.style.display = "flex"
     dataContainer.style.display = "flex"
+    tableContainer.style.display = "flex"
     username = event.target[0].value
     fetch(url+username)
     .then(resp => resp.json())
-    .then(userData => loadUserData(userData.transactions))
+    .then(userData => {
+        loadUserData(userData.transactions)
+        fetchTable(page)})
 })
 
 //load data for specific month for the user
@@ -104,8 +109,61 @@ function loadUserData(transactions){
             }
         }
     })
-}                    
+} 
 
+// fetch table date for a certain page
+function fetchTable(page){
+    fetch(transactions+username+`/${page}`)
+    .then(resp => resp.json())
+    .then(transactionData => loadTableData(transactionData))
+}
 
+// create table headers and add each transaction using addTableRow
+function loadTableData(data){
+    table.innerHTML = ""
+    let tableColumnHeader = document.createElement("tr")
+    let dateHeader = document.createElement("th")
+    dateHeader.innerText = "Date"
+    let categoryHeader = document.createElement("th")
+    categoryHeader.innerText = "Category"
+    let descriptionHeader = document.createElement("th")
+    descriptionHeader.innerText = "Description"
+    let priceHeader = document.createElement("th")
+    priceHeader.innerText = "Price"
+    tableColumnHeader.append(dateHeader, categoryHeader, descriptionHeader, priceHeader)
+    table.append(tableColumnHeader)
+    data.forEach(transaction => addTableRow(transaction))
+}
+
+// create Table Row for each transaction
+function addTableRow(transaction){
+    let tableRow = document.createElement("tr")
+    let date = document.createElement("td")
+    date.innerText = `${transaction.date_of_transaction}`
+    let category = document.createElement("td")
+    category.innerText = transaction.category
+    let description = document.createElement("td")
+    description.innerText = `${transaction.description}`
+    let price = document.createElement("td")
+    price.innerText = `$${transaction.price}`
+    tableRow.append(date,category,description, price)
+    table.append(tableRow)
+}
+
+// click next button to increment page and load table
+let nextBtn = document.querySelector("#next")
+nextBtn.addEventListener("click", () => {
+    page = page + 1
+    fetchTable(page)
+})
+
+// click previous button to decrement page and load table
+let previousBtn = document.querySelector("#previous")
+previousBtn.addEventListener("click", ()=>{
+    if (page>1){
+        page -= 1
+        fetchTable(page)
+    }
+})
 
 

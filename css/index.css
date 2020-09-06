@@ -22,10 +22,25 @@
     display: flex;
     flex-direction: column;
     margin-top: 20px;
-    width: 600px;
-    height: 600px;
+    width: 500px;
+    height: 500px;
 }
 .login {
     margin-left: auto;
     margin-right:auto;
+}
+.table {
+    display: flex;
+    flex-direction:column;
+    margin-top: 20px;
+}
+
+.pageturn{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.pageturnButton {
+    width: 40px;
 }

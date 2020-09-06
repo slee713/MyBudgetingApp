@@ -5,5 +5,8 @@ Rails.application.routes.draw do
   patch '/users/:username', to: 'users#update'
   delete '/users/:username', to: 'users#destroy'
 
+  get '/transactions', to: 'transactions#index'
   get '/transactions/:username/:month', to: 'transactions#index'
+  get '/transactions/:username/', to: 'transactions#index'
+  get '/transactions/:username/:page', to: 'transaction#limit'
 end
