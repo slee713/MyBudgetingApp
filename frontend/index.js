@@ -1,13 +1,14 @@
-let myChart = document.getElementById('myChart').getContext('2d');
+// grab different nodes from index.html
 let loginForm = document.getElementById("login-form")
 let loginContainger = document.getElementById("login-container")
 let dataContainer = document.getElementById("data-container")
+let chartDiv = document.querySelector("#chart-container")
 
-let canvas = document.querySelector("#myChart")
-
+//url
 let url = "http://localhost:3000/users/"
 let transactions = "http://localhost:3000/transactions/"
 
+//load chart based on c
 loginForm.addEventListener("submit", () => {
     event.preventDefault()
     loginContainger.style.display = "none"
@@ -24,7 +25,6 @@ filterMonth.addEventListener("change", ()=>{
     fetch(transactions+`${username}/${month}`)
     .then(resp => resp.json())
     .then(transactions => {
-        canvas.innerHTML = ""
         loadUserData(transactions)
     })
 })
@@ -36,6 +36,11 @@ function round(value, decimals){
     
     
 function loadUserData(transactions){
+    let canvas = document.querySelector("canvas")
+    canvas.remove()
+    let newCanvas = document.createElement("canvas")
+    newCanvas.setAttribute("id", "myChart")
+    chartDiv.append(newCanvas)
     let categories = transactions.map(transaction => transaction.category)
     let labels = [...new Set(categories)]
     costs = []
@@ -46,9 +51,9 @@ function loadUserData(transactions){
         costs.push(round(total,2))
     })
     // Global Options
-    Chart.defaults.global.defaultFontFamily = 'Lato';
-    Chart.defaults.global.defaultFontSize = 18;
-    Chart.defaults.global.defaultFontColor = '#777';
+    // Chart.defaults.global.defaultFontFamily = 'Lato';
+    // Chart.defaults.global.defaultFontSize = 18;
+    // Chart.defaults.global.defaultFontColor = '#777';
     let budgetPieChart = new Chart(myChart, {
         type: 'pie',
         data: {
@@ -78,6 +83,7 @@ function loadUserData(transactions){
                 text: 'Spending Summary',
                 fonstSize: 70
             },
+            maintainAspectRatio: false,
             legend:{
                 display: true,
                 position: 'right',
