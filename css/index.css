@@ -16,6 +16,7 @@
 .body{
     display:flex;
     flex-direction: row;
+    justify-content: space-evenly;
 }
 
 #data-container{
@@ -43,4 +44,9 @@
 
 .pageturnButton {
     width: 40px;
+}
+
+.add-transaction-form{
+    flex-direction:row;
+    justify-content: center;
 }

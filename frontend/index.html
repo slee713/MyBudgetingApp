@@ -12,9 +12,35 @@
             <h1>My Budgeting App</h1>
         </div> 
         <div class = "nav-bar" style= "display: none;">
-            <div>Home</div>
-            <div>Logout</div>
+            <div id= "home">Home</div>
+            <div id="add-transaction">Add Transaction</div>
+            <div id= "logout">Logout</div>
         </div>
+        
+        <div id="add-transaction-form" style="display: none;">
+            <form id="transaction-form">
+                <label for="date">Date</label>
+                <input type="date" name= "date"id="date">
+                <label for="category">Category</label>
+                <select name="category">
+                    <option>Select Category</option>
+                    <option value= "Travel">Travel</option>
+                    <option value= "Entertainment">Entertainment</option>
+                    <option value= "Groceries">Groceries</option>
+                    <option value= "Transportation">Transportation</option>
+                    <option value= "Shopping">Shopping</option>
+                    <option value= "Bills">Bills</option>
+                    <option value= "Food & Drink">Food & Drink</option>
+                    <option value= "Health">Health</option>
+                </select>
+                <label for="description">Description</label>
+                <input type="text" name="description">
+                <label for="price">Price</label>
+                <input type="text" name="price">
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+        
         <div class = "body">
             <div class= "login" id="login-container">
                 <h4 >Please Enter Your Username</h4>
@@ -47,6 +73,7 @@
                 </div>
             </div>
             <div class="table" style="display: none;">
+
                 <div id="table-filter">
                     <label>Filter By Category</label>
                 </div>

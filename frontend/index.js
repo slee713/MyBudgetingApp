@@ -166,4 +166,37 @@ previousBtn.addEventListener("click", ()=>{
     }
 })
 
+let addTransaction = document.querySelector("#add-transaction")
+let transactionForm = document.querySelector("#add-transaction-form")
+let show = false
+addTransaction.addEventListener("click", ()=>{
+    if (show!=false){
+        show = !show
+        transactionForm.style.display = "flex";
+    } else {
+        show = !show
+        transactionForm.style.display = "none";
+    }
+})
 
+transactionForm.addEventListener("submit", ()=> {
+    event.preventDefault();
+    let date_of_transaction = event.target[0].value
+    let category = event.target[1].value
+    let description = event.target[2].value
+    let price = parseFloat(event.target[3].value, 10)
+    config = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
+        body: JSON.stringify({
+            date_of_transaction,
+            category,
+            description,
+            price
+        })
+    }
+    fetch()
+})
