@@ -7,6 +7,11 @@ let tableContainer = document.querySelector("div.table")
 let navBar = document.querySelector("div.nav-bar")
 let table = document.querySelector("#table")
 let page = 1
+let filterYear = document.querySelector("#filter-year")
+let filterMonth = document.getElementById("filter-month")
+let filterMonthDiv = document.querySelector("div#month")
+let filterCategory = document.querySelector("#filter")
+
 //url
 let url = "http://localhost:3000/users/"
 let transactions = "http://localhost:3000/transactions/"
@@ -22,16 +27,84 @@ loginForm.addEventListener("submit", () => {
     .then(resp => resp.json())
     .then(userData => {
         loadUserData(userData.transactions)
+
+        
+        let year= []
+        userData.transactions.forEach(transaction =>{
+            let date = new Date(transaction.date_of_transaction)
+            if (year.includes(date.getFullYear())){
+            } else {
+                year.push(date.getFullYear())
+            }
         })
+        filterYear.innerHTML=""
+        let emptyOption = document.createElement("option")
+        emptyOption.innerText = "Select Year"
+        filterYear.append(emptyOption)
+        year.forEach(yr => {
+            let option = document.createElement("option")
+            option.setAttribute("value", `${yr}`)
+            option.innerText = yr
+            filterYear.append(option)
+        })
+    })
     loginForm.reset()
 })
+filterYear.addEventListener("change", ()=>{
+    filterMonthDiv.style.display = "block"
+    filterMonth.innerHTML = ""
+    let emptyOption = document.createElement("option")
+    emptyOption.innerText = "Select Month"
+    filterMonth.append(emptyOption)
+    let selectedYear = event.target.value
+    let now = new Date()
+    let months = {
+        "01": "January",
+        "02": "February",
+        "03": "March",
+        "04": "April",
+        "05": "May",
+        "06": "June",
+        "07": "July",
+        "08": "August",
+        "09": "September",
+        "10": "October",
+        "11": "November",
+        "12": "December"
+    }
+    if (selectedYear!=now.getFullYear()){
+        for (let key in months){
+            let option = document.createElement("option")
+            option.setAttribute("value", key)
+            option.innerText = months[key]
+            filterMonth.append(option)
+        }
+    } else {
+        for (let key in months){
+            if (key <= now.getMonth()+1){
+                let option = document.createElement("option")
+                option.setAttribute("value", key)
+                option.innerText = months[key]
+                filterMonth.append(option)
+            }
+        }
+    }
+    fetch(transactions+username+`/${event.target.value}`)
+    .then(resp => resp.json())
+    .then(selectedData => {
+        loadUserData(selectedData)
+    })
+
+})
+
 
 //load data for specific month for the user
-let filterMonth = document.getElementById("filter-month")
+
 filterMonth.addEventListener("change", ()=>{
     tableContainer.style.display = "flex"
+    let year = filterYear.value
     let month = event.target.value
-    fetch(transactions+`${username}/${month}`)
+    fetch(transactions+`${username}/${year}/${month}`)
     .then(resp => resp.json())
     .then(transactions => {
         loadUserData(transactions)
@@ -111,14 +184,19 @@ function loadUserData(transactions){
             }
         }
     })
+    filterCategory.innerHTML = ""
+    let empty = document.createElement("option")
+    empty.innerText = "Select Category"
+    filterCategory.append(empty)
+    labels.forEach(l => createOption(l))
 } 
 
-// fetch table date for a certain page
-// function fetchTable(page){
-//     fetch(transactions+username+`/${page}`)
-//     .then(resp => resp.json())
-//     .then(transactionData => loadTableData(transactionData))
-// }
+function createOption(l){
+    let option = document.createElement("option")
+    option.setAttribute("value", l)
+    option.innerText = l
+    filterCategory.append(option)
+}
 
 // create table headers and add each transaction using addTableRow
 function loadTableData(data){
@@ -213,4 +291,17 @@ logout.addEventListener("click", ()=>{
     navBar.style.display = "none"
     dataContainer.style.display = "none"
     tableContainer.style.display = "none"
+    filterMonthDiv.style.display = "none"
+    filterYear.innerHTML = ""
+    filterMonth.innerHTML = ""
+})
+
+
+filterCategory.addEventListener("change", ()=>{
+    let year = filterYear.value
+    let month = filterMonth.value
+    let category = event.target.value
+    fetch(transactions+`${username}/${year}/${month}/${category}`)
+    .then(res => res.json())
+    .then(categoryData => loadTableData(categoryData))
 })

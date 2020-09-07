@@ -1,19 +1,26 @@
 class TransactionsController < ApplicationController
     def index
-        if params[:username]
             user = User.find_by(username: params[:username])
-            if params[:month]
-                transactions = user.transactions.where("cast(strftime('%m', date_of_transaction)as int) = #{params[:month]}")
-                sort_transactions = transactions.order("date_of_transaction ASC")
-                render json: sort_transactions
-            else 
+            if params[:year]
+                transactions = user.transactions.where("cast(strftime('%Y', date_of_transaction) as int) = #{params[:year]}")
+                if params[:month]
+                    month_transactions = transactions.where("cast(strftime('%m', date_of_transaction)as int) = #{params[:month]}")
+                    if params[:category] && params[:category]!= "All"
+                        category_transactions = month_transactions.where(category: params[:category])
+                        sorted_transactions = category_transactions.order("date_of_transaction ASC")
+                        render json: sorted_transactions
+                    else
+                        sorted_transactions = month_transactions.order("date_of_transaction ASC")
+                        render json: sorted_transactions
+                    end
+                else 
+                    sorted_transactions = transactions.order("date_of_transaction ASC")
+                    render json: sorted_transactions
+                end
+            else
                 transactions = user.transactions.order("date_of_transaction ASC")
                 render json: transactions
             end
-        else
-            transactions = Transaction.all 
-            render json: transactions
-        end
     end
 
     # def limit 

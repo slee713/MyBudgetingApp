@@ -50,3 +50,7 @@
     flex-direction: column;
     justify-content: space-evenly;
 }
+
+.filter-select-container{
+    flex-direction: row;
+}
