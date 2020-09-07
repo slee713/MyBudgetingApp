@@ -24,6 +24,7 @@ loginForm.addEventListener("submit", () => {
     .then(userData => {
         loadUserData(userData.transactions)
         fetchTable(page)})
+    loginForm.reset()
 })
 
 //load data for specific month for the user
@@ -166,6 +167,7 @@ previousBtn.addEventListener("click", ()=>{
     }
 })
 
+//show add transaction form
 let addTransaction = document.querySelector("#add-transaction")
 let transactionForm = document.querySelector("#add-transaction-form")
 let show = false
@@ -200,8 +202,14 @@ addTransaction.addEventListener("click", ()=>{
 //     }
 //     fetch(transactions+username, config)
 //     .then(resp => resp.json())
-//     .then(updatedUserData => {
-//         loadUserData(updatedUserData.transactions)
-//         fetchTable(page)
-//     })
+//     .then(console.log)
 // })
+
+// return to login page
+let logout = document.querySelector("#logout")
+logout.addEventListener("click", ()=>{
+    loginContainger.style.display = "flex"
+    navBar.style.display = "none"
+    dataContainer.style.display = "none"
+    tableContainer.style.display = "none"
+})

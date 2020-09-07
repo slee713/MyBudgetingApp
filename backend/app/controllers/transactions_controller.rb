@@ -17,7 +17,9 @@ class TransactionsController < ApplicationController
 
     def limit 
         user = User.find_by(username: params[:username])
-        transactions = user.transactions.paginate(page: params[:page], per_page: 20)
+        sort_transactions = user.transactions.order('date_of_transaction DESC')
+        transactions = sort_transactions.paginate(page: params[:page], per_page: 20)
+        
         render json: transactions
     end
 
