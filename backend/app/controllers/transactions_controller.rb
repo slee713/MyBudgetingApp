@@ -3,10 +3,11 @@ class TransactionsController < ApplicationController
         if params[:username]
             user = User.find_by(username: params[:username])
             if params[:month]
-                transactions = user.transactions.find_all {|i| i.date_of_transaction.month == params[:month].to_i}
-                render json: transactions
+                transactions = user.transactions.where("cast(strftime('%m', date_of_transaction)as int) = #{params[:month]}")
+                sort_transactions = transactions.order("date_of_transaction ASC")
+                render json: sort_transactions
             else 
-                transactions = user.transactions
+                transactions = user.transactions.order("date_of_transaction ASC")
                 render json: transactions
             end
         else
@@ -15,13 +16,13 @@ class TransactionsController < ApplicationController
         end
     end
 
-    def limit 
-        user = User.find_by(username: params[:username])
-        sort_transactions = user.transactions.order('date_of_transaction DESC')
-        transactions = sort_transactions.paginate(page: params[:page], per_page: 20)
+    # def limit 
+    #     user = User.find_by(username: params[:username])
+    #     sort_transactions = user.transactions.order('date_of_transaction DESC')
+    #     # transactions = sort_transactions.paginate(page: params[:page], per_page: 20)
         
-        render json: transactions
-    end
+    #     render json: transactions
+    # end
 
     def create
         user = User.find_by(username: params[:username])
@@ -39,8 +40,8 @@ class TransactionsController < ApplicationController
 
     private
 
-    def transaction_params
-        params.require(:transaction).permit(:category, :price, :description, :date_of_transaction)
-    end
+    # def transaction_params
+    #     params.require(:transaction).permit(:category, :price, :description, :date_of_transaction)
+    # end
 
 end

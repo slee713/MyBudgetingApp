@@ -17,24 +17,25 @@ loginForm.addEventListener("submit", () => {
     loginContainger.style.display = "none"
     navBar.style.display = "flex"
     dataContainer.style.display = "flex"
-    tableContainer.style.display = "flex"
     username = event.target[0].value
     fetch(url+username)
     .then(resp => resp.json())
     .then(userData => {
         loadUserData(userData.transactions)
-        fetchTable(page)})
+        })
     loginForm.reset()
 })
 
 //load data for specific month for the user
 let filterMonth = document.getElementById("filter-month")
 filterMonth.addEventListener("change", ()=>{
+    tableContainer.style.display = "flex"
     let month = event.target.value
     fetch(transactions+`${username}/${month}`)
     .then(resp => resp.json())
     .then(transactions => {
         loadUserData(transactions)
+        loadTableData(transactions)
     })
 })
 
@@ -113,11 +114,11 @@ function loadUserData(transactions){
 } 
 
 // fetch table date for a certain page
-function fetchTable(page){
-    fetch(transactions+username+`/${page}`)
-    .then(resp => resp.json())
-    .then(transactionData => loadTableData(transactionData))
-}
+// function fetchTable(page){
+//     fetch(transactions+username+`/${page}`)
+//     .then(resp => resp.json())
+//     .then(transactionData => loadTableData(transactionData))
+// }
 
 // create table headers and add each transaction using addTableRow
 function loadTableData(data){

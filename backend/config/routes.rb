@@ -8,6 +8,6 @@ Rails.application.routes.draw do
   get '/transactions', to: 'transactions#index'
   get '/transactions/:username/:month', to: 'transactions#index'
   get '/transactions/:username/', to: 'transactions#index'
-  get '/transactions/:username/:page', to: 'transactions#limit'
+  # get '/transactions/:username/:page', to: 'transactions#limit'
   post '/transactions/:username/', to: 'transactions#create'
 end
