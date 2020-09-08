@@ -11,6 +11,6 @@ Rails.application.routes.draw do
   get '/transactions/:username/:year/:month', to: 'transactions#index' 
   get '/transactions/:username/:year/:month/:category', to: 'transactions#index'
   # get '/transactions/:username/:page', to: 'transactions#limit'
-  post '/transactions/:username/', to: 'transactions#create'
-  patch '/transactions/:username/:id', to: 'transactions#update'
+  post '/transactions/', to: 'transactions#create'
+  patch '/transactions/:id', to: 'transactions#update'
 end

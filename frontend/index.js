@@ -188,6 +188,10 @@ function loadUserData(transactions){
     filterCategory.innerHTML = ""
     let empty = document.createElement("option")
     empty.innerText = "Select Category"
+    let all = document.createElement("option")
+    option.setAttribute("value", "All")
+    option.innerText = "All"
+    filterCategory.append(option)
     filterCategory.append(empty)
     labels.forEach(l => createOption(l))
 } 
@@ -282,8 +286,7 @@ transactionForm.addEventListener("submit", ()=> {
             price
         })
     }
-    fetch(transactions+username, config)
-    .then(resp => resp.json())
+    fetch(transactions, config)
     .then(console.log)
 })
 
