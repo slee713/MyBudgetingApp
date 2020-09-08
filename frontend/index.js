@@ -339,14 +339,23 @@ transactionForm.addEventListener("submit", ()=> {
             price
         })
     }
-
-    
-
     fetch(transactions, config)
+        
+    
+    .then(()=>{
+        let date = new Date(date_of_transaction)
+        let year = date.getFullYear()
+        let month = date.getMonth()+1
+        filterYear.value = year
+        filterMonth.value = month
+        fetch(transactions+`${username}/${year}/${month}`)
         .then(res => res.json())
-        .then(transaction => {
-            addTableRow(transaction)
-            fetchUserData(username)
+        .then(transactions =>{
+            loadUserData(transactions)
+            loadTableData(transactions)
+                transactionForm.reset()
+                transactionFormDiv.style.display = "none"
+            })
         })
 })
 
