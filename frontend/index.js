@@ -189,10 +189,10 @@ function loadUserData(transactions){
     let empty = document.createElement("option")
     empty.innerText = "Select Category"
     let all = document.createElement("option")
-    option.setAttribute("value", "All")
-    option.innerText = "All"
-    filterCategory.append(option)
+    all.setAttribute("value", "All")
+    all.innerText = "All"
     filterCategory.append(empty)
+    filterCategory.append(all)
     labels.forEach(l => createOption(l))
 } 
 
