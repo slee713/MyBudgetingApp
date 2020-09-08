@@ -37,27 +37,29 @@ function fetchUserData(username){
     fetch(url+username)
     .then(resp => resp.json())
     .then(userData => {
-        loadUserData(userData.transactions)
         id = userData.id
-        // create options for filter based on year of transactions for user
-        let year= []
-        userData.transactions.forEach(transaction =>{
-            let date = new Date(transaction.date_of_transaction)
-            if (year.includes(date.getFullYear())){
-            } else {
-                year.push(date.getFullYear())
-            }
-        })
-        filterYear.innerHTML=""
-        let emptyOption = document.createElement("option")
-        emptyOption.innerText = "Select Year"
-        filterYear.append(emptyOption)
-        year.forEach(yr => {
-            let option = document.createElement("option")
-            option.setAttribute("value", `${yr}`)
-            option.innerText = yr
-            filterYear.append(option)
-        })
+        if (userData.transactions.length > 0){
+            loadUserData(userData.transactions)
+            // create options for filter based on year of transactions for user
+            let year= []
+            userData.transactions.forEach(transaction =>{
+                let date = new Date(transaction.date_of_transaction)
+                if (year.includes(date.getFullYear())){
+                } else {
+                    year.push(date.getFullYear())
+                }
+            })
+            filterYear.innerHTML=""
+            let emptyOption = document.createElement("option")
+            emptyOption.innerText = "Select Year"
+            filterYear.append(emptyOption)
+            year.forEach(yr => {
+                let option = document.createElement("option")
+                option.setAttribute("value", `${yr}`)
+                option.innerText = yr
+                filterYear.append(option)
+            })
+        }
     })
 }
 
@@ -351,6 +353,7 @@ transactionForm.addEventListener("submit", ()=> {
         fetch(transactions+`${username}/${year}/${month}`)
         .then(res => res.json())
         .then(transactions =>{
+            tableContainer.style.display = "flex"
             loadUserData(transactions)
             loadTableData(transactions)
                 transactionForm.reset()
@@ -362,11 +365,12 @@ transactionForm.addEventListener("submit", ()=> {
 // return to login page
 let logout = document.querySelector("#logout")
 logout.addEventListener("click", ()=>{
-    loginContainger.style.display = "flex"
+    loginContainer.style.display = "flex"
     navBar.style.display = "none"
     dataContainer.style.display = "none"
     tableContainer.style.display = "none"
     filterMonthDiv.style.display = "none"
+    summaryDiv.style.display = "none"
     filterYear.innerHTML = ""
     filterMonth.innerHTML = ""
 })
