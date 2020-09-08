@@ -17,6 +17,7 @@
     display:flex;
     flex-direction: row;
     justify-content: space-evenly;
+    margin-top: 80px;
 }
 
 #data-container{
@@ -31,6 +32,7 @@
     flex-direction: column;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 40px;
 }
 
 .login {
@@ -40,12 +42,14 @@
 .table {
     display: flex;
     flex-direction:column;
-    margin-top: 20px;
+    margin-top: 40px;
     margin-left:auto;
     margin-right:auto;
 }
 
-.edit_form{
+
+
+#edit_form{
     margin-left: auto;
     margin-right: auto;
 }
@@ -59,10 +63,17 @@
     width: 40px;
 }
 
-.add-transaction-form{
+#add-transaction-form{
     flex-direction: column;
     justify-content: space-evenly;
 }
+#form-container{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 80px;
+    margin-bottom: 50px;
+}
+
 
 .filter-select-container{
     flex-direction: row;

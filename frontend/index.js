@@ -10,13 +10,15 @@ let page = 1
 let filterYear = document.querySelector("#filter-year")
 let filterMonth = document.getElementById("filter-month")
 let filterMonthDiv = document.querySelector("div#month")
-let filterCategory = document.querySelector("#filter")
+let filterCategory = document.querySelector("select#filter")
 let summaryDiv = document.querySelector("#summary")
 let editFormDiv = document.querySelector("#edit")
 let editForm = document.querySelector("#edit-form")
+let home = document.querySelector("#home")
 //url
 let url = "http://localhost:3000/users/"
 let transactions = "http://localhost:3000/transactions/"
+let now = new Date()
 
 //load chart based on user data
 loginForm.addEventListener("submit", () => {
@@ -30,6 +32,7 @@ loginForm.addEventListener("submit", () => {
     loginForm.reset()
 })
 
+//fetch userdata based on username
 function fetchUserData(username){
     fetch(url+username)
     .then(resp => resp.json())
@@ -60,7 +63,7 @@ function fetchUserData(username){
 
 //filter year event listener
 filterYear.addEventListener("change", ()=>{
-    filterMonthDiv.style.display = "block"
+    filterMonthDiv.style.display = "flex"
     filterMonth.innerHTML = ""
     let emptyOption = document.createElement("option")
     emptyOption.innerText = "Select Month"
@@ -68,15 +71,15 @@ filterYear.addEventListener("change", ()=>{
     let selectedYear = event.target.value
     let now = new Date()
     let months = {
-        "01": "January",
-        "02": "February",
-        "03": "March",
-        "04": "April",
-        "05": "May",
-        "06": "June",
-        "07": "July",
-        "08": "August",
-        "09": "September",
+        "1": "January",
+        "2": "February",
+        "3": "March",
+        "4": "April",
+        "5": "May",
+        "6": "June",
+        "7": "July",
+        "8": "August",
+        "9": "September",
         "10": "October",
         "11": "November",
         "12": "December"
@@ -198,11 +201,11 @@ function loadUserData(transactions){
     let all = document.createElement("option")
     all.setAttribute("value", "All")
     all.innerText = "All"
-    filterCategory.append(empty)
-    filterCategory.append(all)
+    filterCategory.append(empty, all)
     labels.forEach(l => createOption(l))
 } 
 
+//create filter option
 function createOption(l){
     let option = document.createElement("option")
     option.setAttribute("value", l)
@@ -358,7 +361,47 @@ filterCategory.addEventListener("change", ()=>{
 })
 
 
+
+
+home.addEventListener("click", ()=>{
+    tableContainer.style.display = "none"
+    filterMonthDiv.style.display = "none"
+    fetchUserData(username)
+})
+
 editForm.addEventListener("submit", ()=>{
     event.preventDefault()
-
+    config = {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
+        body: JSON.stringify({
+            user_id: id,
+            date_of_transaction: event.target[1].value,
+            category: event.target[2].value,
+            description: event.target[3].value,
+            price: event.target[4].value
+        })
+    }
+    fetch(transactions+event.target[0].value, config)
+    .then(res => res.json())
+    .then(updatedTransaction =>{
+        let x = document.querySelector(`[data-num = '${updatedTransaction.id}']`)
+        x.children[0].innerText = updatedTransaction.date_of_transaction
+        x.children[1].innerText = updatedTransaction.category
+        x.children[2].innerText = updatedTransaction.description
+        x.children[3].innerText = `$${updatedTransaction.price}`
+    })
+    // let year = filterYear.value
+    // let month = filterMonth.value
+    // fetch(transactions+`${username}/${year}/${month}`)
+    // .then(res=> res.json())
+    // .then(updatedData => {
+    //     loadUserData(updatedData)
+    //     loadTableData(updatedData)
+    // })
+    editForm.reset()
+    editFormDiv.style.display= "none"
 })

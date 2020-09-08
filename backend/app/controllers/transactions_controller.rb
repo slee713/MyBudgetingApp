@@ -45,7 +45,7 @@ class TransactionsController < ApplicationController
         transaction = Transaction.find(params[:id])
         transaction.update(transaction_params)
 
-        render json:transaction
+        render json: transaction
     end
 
     def destroy
