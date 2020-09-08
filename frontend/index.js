@@ -28,7 +28,7 @@ loginForm.addEventListener("submit", () => {
     .then(userData => {
         loadUserData(userData.transactions)
 
-        
+        // create options for filter based on year of transactions for user
         let year= []
         userData.transactions.forEach(transaction =>{
             let date = new Date(transaction.date_of_transaction)
@@ -50,6 +50,8 @@ loginForm.addEventListener("submit", () => {
     })
     loginForm.reset()
 })
+
+//filter year event listener
 filterYear.addEventListener("change", ()=>{
     filterMonthDiv.style.display = "block"
     filterMonth.innerHTML = ""
@@ -99,7 +101,6 @@ filterYear.addEventListener("change", ()=>{
 
 
 //load data for specific month for the user
-
 filterMonth.addEventListener("change", ()=>{
     tableContainer.style.display = "flex"
     let year = filterYear.value
@@ -296,7 +297,7 @@ logout.addEventListener("click", ()=>{
     filterMonth.innerHTML = ""
 })
 
-
+//category filter for table
 filterCategory.addEventListener("change", ()=>{
     let year = filterYear.value
     let month = filterMonth.value
