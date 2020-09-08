@@ -12,6 +12,8 @@ let filterMonth = document.getElementById("filter-month")
 let filterMonthDiv = document.querySelector("div#month")
 let filterCategory = document.querySelector("#filter")
 let summaryDiv = document.querySelector("#summary")
+let editFormDiv = document.querySelector("#edit")
+let editForm = document.querySelector("#edit-form")
 //url
 let url = "http://localhost:3000/users/"
 let transactions = "http://localhost:3000/transactions/"
@@ -252,7 +254,12 @@ function addTableRow(transaction){
 
 
     editBtn.addEventListener("click", () => {
-        
+        editFormDiv.style.display = "flex"
+        editForm.children[0].value = transaction.id
+        editForm.children[2].value = transaction.date_of_transaction
+        editForm.children[4].value = transaction.category
+        editForm.children[6].value = transaction.description
+        editForm.children[8].value = transaction.price
     })
 
     deleteBtn.addEventListener("click", () => {
@@ -348,4 +355,10 @@ filterCategory.addEventListener("change", ()=>{
     fetch(transactions+`${username}/${year}/${month}/${category}`)
     .then(res => res.json())
     .then(categoryData => loadTableData(categoryData))
+})
+
+
+editForm.addEventListener("submit", ()=>{
+    event.preventDefault()
+
 })
