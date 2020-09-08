@@ -23,6 +23,11 @@ loginForm.addEventListener("submit", () => {
     navBar.style.display = "flex"
     dataContainer.style.display = "flex"
     username = event.target[0].value
+    fetchUserData(username)
+    loginForm.reset()
+})
+
+function fetchUserData(username){
     fetch(url+username)
     .then(resp => resp.json())
     .then(userData => {
@@ -48,8 +53,7 @@ loginForm.addEventListener("submit", () => {
             filterYear.append(option)
         })
     })
-    loginForm.reset()
-})
+}
 
 //filter year event listener
 filterYear.addEventListener("change", ()=>{
@@ -251,7 +255,12 @@ function addTableRow(transaction){
     })
 
     deleteBtn.addEventListener("click", () => {
-        
+        let transactionID = parseInt(tableRow.dataset.num, 10)
+        config = {
+            method: 'DELETE'
+        }
+        fetch(transactions+transactionID)
+        tableRow.remove()
     })
 }
 
@@ -307,9 +316,15 @@ transactionForm.addEventListener("submit", ()=> {
             price
         })
     }
+
+    
+
     fetch(transactions, config)
-    .then(res => res.json())
-    .then(console.log)
+        .then(res => res.json())
+        .then(transaction => {
+            addTableRow(transaction)
+            fetchUserData(username)
+        })
 })
 
 // return to login page
