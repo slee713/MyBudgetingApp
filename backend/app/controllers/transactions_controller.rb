@@ -24,16 +24,19 @@ class TransactionsController < ApplicationController
     end
 
     def create
-        user = User.find_by(username: params[:username])
-        transaction = Transaction.create(
-            user: user,
-            category: params[:transaction][:category],
-            price: params[:transaction][:price],
-            date_of_transaction: params[:transaction][:date_of_transaction],
-            description: params[:transaction][:description]
-        )
-        transactions = user.transactions
-        render json: transactions
+        transaction = Transaction.new(transaction_params)
+        # transaction = Transaction.create(
+        #     user: user,
+        #     category: params[:transaction][:category],
+        #     price: params[:transaction][:price],
+        #     date_of_transaction: params[:transaction][:date_of_transaction],
+        #     description: params[:transaction][:description]
+        # )
+        if transaction
+            transaction.save
+            render json: transaction
+        end
+        # transactions = user.transactions
     end
 
     def update
@@ -43,8 +46,8 @@ class TransactionsController < ApplicationController
 
     private
 
-    # def transaction_params
-    #     params.require(:transaction).permit(:category, :price, :description, :date_of_transaction)
-    # end
+    def transaction_params
+        params.require(:transaction).permit(:user_id, :category, :price, :description, :date_of_transaction)
+    end
 
 end

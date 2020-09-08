@@ -23,5 +23,8 @@ module Backend
       end
     end
 
+    config.action_dispatch.default_headers.merge!(
+      'Referrer-Policy' => 'same-origin'
+    )
   end
 end

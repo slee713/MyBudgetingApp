@@ -27,7 +27,7 @@ loginForm.addEventListener("submit", () => {
     .then(resp => resp.json())
     .then(userData => {
         loadUserData(userData.transactions)
-
+        id = userData.id
         // create options for filter based on year of transactions for user
         let year= []
         userData.transactions.forEach(transaction =>{
@@ -280,6 +280,7 @@ transactionForm.addEventListener("submit", ()=> {
             "Accept": "application/json"
         },
         body: JSON.stringify({
+            user_id: id,
             date_of_transaction,
             category,
             description,
@@ -287,6 +288,7 @@ transactionForm.addEventListener("submit", ()=> {
         })
     }
     fetch(transactions, config)
+    .then(res => res.json())
     .then(console.log)
 })
 
