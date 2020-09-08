@@ -215,7 +215,11 @@ function loadTableData(data){
     descriptionHeader.innerText = "Description"
     let priceHeader = document.createElement("th")
     priceHeader.innerText = "Price"
-    tableColumnHeader.append(dateHeader, categoryHeader, descriptionHeader, priceHeader)
+
+    let actionHeader = document.createElement("th")
+    actionHeader.innerText = "Action"
+    
+    tableColumnHeader.append(dateHeader, categoryHeader, descriptionHeader, priceHeader, actionHeader)
     table.append(tableColumnHeader)
     data.forEach(transaction => addTableRow(transaction))
 }
@@ -223,6 +227,7 @@ function loadTableData(data){
 // create Table Row for each transaction
 function addTableRow(transaction){
     let tableRow = document.createElement("tr")
+    tableRow.setAttribute("data-num", transaction.id)
     let date = document.createElement("td")
     date.innerText = `${transaction.date_of_transaction}`
     let category = document.createElement("td")
@@ -231,8 +236,23 @@ function addTableRow(transaction){
     description.innerText = `${transaction.description}`
     let price = document.createElement("td")
     price.innerText = `$${transaction.price}`
-    tableRow.append(date,category,description, price)
+    let actionBtns = document.createElement("td")
+    let editBtn = document.createElement("button")
+    let deleteBtn = document.createElement("button")
+    editBtn.innerText = "Edit"
+    deleteBtn.innerText = "Delete"
+    actionBtns.append(editBtn, deleteBtn)
+    tableRow.append(date,category,description, price, actionBtns)
     table.append(tableRow)
+
+
+    editBtn.addEventListener("click", () => {
+        
+    })
+
+    deleteBtn.addEventListener("click", () => {
+        
+    })
 }
 
 // click next button to increment page and load table
@@ -267,7 +287,6 @@ addTransactionBtn.addEventListener("click", ()=>{
 })
 
 //submit a transaction and reload data
-
 transactionForm.addEventListener("submit", ()=> {
     event.preventDefault();
     let date_of_transaction = event.target[0].value
