@@ -257,12 +257,16 @@ function addTableRow(transaction){
 
 
     editBtn.addEventListener("click", () => {
-        editFormDiv.style.display = "flex"
-        editForm.children[0].value = transaction.id
-        editForm.children[2].value = transaction.date_of_transaction
-        editForm.children[4].value = transaction.category
-        editForm.children[6].value = transaction.description
-        editForm.children[8].value = transaction.price
+        if (editFormDiv.style.display === "none"){
+            editFormDiv.style.display = "flex"
+            editForm.children[0].value = transaction.id
+            editForm.children[2].value = transaction.date_of_transaction
+            editForm.children[4].value = transaction.category
+            editForm.children[6].value = transaction.description
+            editForm.children[8].value = transaction.price
+        }else {
+            editFormDiv.style.display = "none"
+        }
     })
 
     deleteBtn.addEventListener("click", () => {
@@ -270,8 +274,16 @@ function addTableRow(transaction){
         config = {
             method: 'DELETE'
         }
-        fetch(transactions+transactionID)
-        tableRow.remove()
+        fetch(transactions+transactionID, config)
+        .then(()=>{
+            let year = filterYear.value
+            let month = filterMonth.value
+            fetch(transactions+`${username}/${year}/${month}`)
+            .then(res=> res.json())
+            .then(updatedData => {
+            loadUserData(updatedData)
+             })
+        })
     })
 }
 
@@ -388,20 +400,18 @@ editForm.addEventListener("submit", ()=>{
     fetch(transactions+event.target[0].value, config)
     .then(res => res.json())
     .then(updatedTransaction =>{
-        let x = document.querySelector(`[data-num = '${updatedTransaction.id}']`)
-        x.children[0].innerText = updatedTransaction.date_of_transaction
-        x.children[1].innerText = updatedTransaction.category
-        x.children[2].innerText = updatedTransaction.description
-        x.children[3].innerText = `$${updatedTransaction.price}`
+        
+        let year = filterYear.value
+        let month = filterMonth.value
+        fetch(transactions+`${username}/${year}/${month}`)
+        .then(res=> res.json())
+        .then(updatedData => {
+            loadUserData(updatedData)
+            loadTableData(updatedData)
+            editForm.reset()
+            editFormDiv.style.display= "none"
+        })
     })
-    // let year = filterYear.value
-    // let month = filterMonth.value
-    // fetch(transactions+`${username}/${year}/${month}`)
-    // .then(res=> res.json())
-    // .then(updatedData => {
-    //     loadUserData(updatedData)
-    //     loadTableData(updatedData)
-    // })
-    editForm.reset()
-    editFormDiv.style.display= "none"
+   
+    
 })
