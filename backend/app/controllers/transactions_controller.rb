@@ -44,6 +44,9 @@ class TransactionsController < ApplicationController
         render json: transactions
     end
 
+    def update
+        user = User.find_by(username: params[:username])
+
 
     private
 
