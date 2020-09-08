@@ -40,8 +40,17 @@ class TransactionsController < ApplicationController
     end
 
     def update
-        user = User.find_by(username: params[:username])
+        transaction = Transaction.find(params[:id])
+        transaction.update(transaction_params)
+
+        render json:transaction
     end
+
+    def destroy
+        transaction = Transaction.find(params[:id])
+        transaction.destroy()
+    end
+    
 
 
     private

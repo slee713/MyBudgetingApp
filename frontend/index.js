@@ -252,16 +252,17 @@ previousBtn.addEventListener("click", ()=>{
 })
 
 //show add transaction form
-let addTransaction = document.querySelector("#add-transaction")
-let transactionForm = document.querySelector("#add-transaction-form")
+let addTransactionBtn = document.querySelector("#add-transaction")
+let transactionFormDiv = document.querySelector("#add-transaction-form")
+let transactionForm = document.querySelector("#transaction-form")
 let show = false
-addTransaction.addEventListener("click", ()=>{
+addTransactionBtn.addEventListener("click", ()=>{
     if (show!=false){
         show = !show
-        transactionForm.style.display = "flex";
+        transactionFormDiv.style.display = "flex";
     } else {
         show = !show
-        transactionForm.style.display = "none";
+        transactionFormDiv.style.display = "none";
     }
 })
 

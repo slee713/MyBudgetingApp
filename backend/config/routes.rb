@@ -13,4 +13,5 @@ Rails.application.routes.draw do
   # get '/transactions/:username/:page', to: 'transactions#limit'
   post '/transactions/', to: 'transactions#create'
   patch '/transactions/:id', to: 'transactions#update'
+  delete '/transactions/:id', to: 'transactions#destroy'
 end
