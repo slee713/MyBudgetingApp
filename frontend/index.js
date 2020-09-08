@@ -3,7 +3,7 @@ let loginForm = document.getElementById("login-form")
 let loginContainer = document.getElementById("login-container")
 let dataContainer = document.getElementById("data-container")
 let chartDiv = document.querySelector("#chart-container")
-let tableContainer = document.querySelector("div.table")
+let tableContainer = document.querySelector("div#table-container")
 let navBar = document.querySelector("div.nav-bar")
 let table = document.querySelector("#table")
 let page = 1
@@ -11,7 +11,7 @@ let filterYear = document.querySelector("#filter-year")
 let filterMonth = document.getElementById("filter-month")
 let filterMonthDiv = document.querySelector("div#month")
 let filterCategory = document.querySelector("#filter")
-
+let summaryDiv = document.querySelector("#summary")
 //url
 let url = "http://localhost:3000/users/"
 let transactions = "http://localhost:3000/transactions/"
@@ -22,6 +22,7 @@ loginForm.addEventListener("submit", () => {
     loginContainer.style.display = "none"
     navBar.style.display = "flex"
     dataContainer.style.display = "flex"
+    summaryDiv.style.display = "flex"
     username = event.target[0].value
     fetchUserData(username)
     loginForm.reset()
