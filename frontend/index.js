@@ -1,6 +1,6 @@
 // grab different nodes from index.html
 let loginForm = document.getElementById("login-form")
-let loginContainger = document.getElementById("login-container")
+let loginContainer = document.getElementById("login-container")
 let dataContainer = document.getElementById("data-container")
 let chartDiv = document.querySelector("#chart-container")
 let tableContainer = document.querySelector("div.table")
@@ -19,7 +19,7 @@ let transactions = "http://localhost:3000/transactions/"
 //load chart based on user data
 loginForm.addEventListener("submit", () => {
     event.preventDefault()
-    loginContainger.style.display = "none"
+    loginContainer.style.display = "none"
     navBar.style.display = "flex"
     dataContainer.style.display = "flex"
     username = event.target[0].value
