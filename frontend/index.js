@@ -304,7 +304,7 @@ previousBtn.addEventListener("click", ()=>{
 
 //show add transaction form
 let addTransactionBtn = document.querySelector("#add-transaction")
-let transactionFormDiv = document.querySelector("#add-transaction-form")
+let transactionFormDiv = document.querySelector("#form-container")
 let transactionForm = document.querySelector("#transaction-form")
 let show = false
 addTransactionBtn.addEventListener("click", ()=>{
@@ -418,6 +418,19 @@ editForm.addEventListener("submit", ()=>{
             editFormDiv.style.display= "none"
         })
     })
+})
+
+let monthlyBudgetBtn = document.querySelector("#monthly-budget")
+let monthlyBudgetDiv = document.querySelector("#monthly-budget-container")
+let display = false
+monthlyBudgetBtn.addEventListener("click", ()=>{
+    if (!display){
+        display = !display
+        monthlyBudgetDiv.style.display = "flex"
+    } else {
+        display = !display
+        monthlyBudgetDiv.style.display = "none"
+    }
 })
 
 // things to add or consider

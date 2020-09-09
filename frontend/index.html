@@ -14,34 +14,57 @@
         <div class = "nav-bar" style= "display: none;">
             <div id= "home">Home</div>
             <div id="add-transaction">Add Transaction</div>
+            <div id= "monthly-budget">Monthly Budget</div>
             <div id= "logout">Logout</div>
         </div>
         
-        <div id="add-transaction-form" style="display: none;">
-            <div id= "form-container">
-                <form id="transaction-form">
-                    <label for="date">Date</label>
-                    <input type="date" name= "date"id="date">
-                    <label for="category">Category</label>
-                    <select name="category">
-                        <option>Select Category</option>
-                        <option value= "Travel">Travel</option>
-                        <option value= "Entertainment">Entertainment</option>
-                        <option value= "Groceries">Groceries</option>
-                        <option value= "Transportation">Transportation</option>
-                        <option value= "Shopping">Shopping</option>
-                        <option value= "Bills">Bills</option>
-                        <option value= "Food & Drink">Food & Drink</option>
-                        <option value= "Health">Health</option>
-                    </select>
-                    <label for="description">Description</label>
-                    <input type="text" name="description">
-                    <label for="price">Price</label>
-                    <input type="text" name="price">
-                    <button type="submit">Submit</button>
-                </form>
-            </div>
+        
+        <div class="form-container" id= "form-container" style="display: none;">
+            <form class="form" id="transaction-form">
+                <label for="date">Date</label>
+                <input type="date" name= "date"id="date">
+                <label for="category">Category</label>
+                <select name="category">
+                    <option>Select Category</option>
+                    <option value= "Travel">Travel</option>
+                    <option value= "Entertainment">Entertainment</option>
+                    <option value= "Groceries">Groceries</option>
+                    <option value= "Transportation">Transportation</option>
+                    <option value= "Shopping">Shopping</option>
+                    <option value= "Bills">Bills</option>
+                    <option value= "Food & Drink">Food & Drink</option>
+                    <option value= "Health">Health</option>
+                </select>
+                <label for="description">Description</label>
+                <input type="text" name="description">
+                <label for="price">Price</label>
+                <input type="text" name="price">
+                <button type="submit">Submit</button>
+            </form>
         </div>
+        <div class="form-container" id= "monthly-budget-container" style="display: none;">
+            <form class= "form" id="set-monthly-budget">
+                <label>Travel Budget</label>
+                <input type= "text"><br>
+                <label>Entertainment Budget</label>
+                <input type= "text"><br>
+                <label>Groceries Budget</label>
+                <input type= "text"><br>
+                <label>Transportation Budget</label>
+                <input type= "text"><br>
+                <label>Shopping Budget</label>
+                <input type= "text"><br>
+                <label>Bill Budget</label>
+                <input type= "text"><br>
+                <label>Food & Drink Budget</label>
+                <input type= "text"><br>
+                <label>Health Budget</label>
+                <input type= "text"><br>
+                <br>
+                <button type="submit">Add Monthly Budgets</button>
+            </form>
+        </div>
+        
         
         <div class = "body">
             <div class= "login" id="login-container">
@@ -70,7 +93,16 @@
                 </div>
             </div>
             <div id="summary" style="display: none;">
-                Summary In for Person
+                <h2>Total Spent This Period</h2>
+                <h4>Total Remaining in Budget</h4>
+                <h5 id="Travel">Percent Spent of Travel Budget</h5>
+                <h5 id="Entertainment">Percent Spent of Entertainment Budget</h5>
+                <h5 id="Groceries">Percent Spent of Groceries Budget</h5>
+                <h5 id="Transportation">Percent Spent of Transportation Budget</h5>
+                <h5 id="Shopping">Percent Spent of Shopping Budget</h5>
+                <h5 id="Bills">Percent Spent of Bills Budget</h5>
+                <h5 id="Food & Drink">Percent Spent of Food & Drink Budget</h5>
+                <h5 id="Health">Percent Spent of Health Budget</h5>
             </div>
         </div> 
         <div id = "table-container" style="display: none;">
