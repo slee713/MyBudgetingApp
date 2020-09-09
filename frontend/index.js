@@ -7,6 +7,7 @@ let tableContainer = document.querySelector("div.table")
 let navBar = document.querySelector("div.nav-bar")
 let table = document.querySelector("#table")
 let page = 1
+
 let filterYear = document.querySelector("#filter-year")
 let filterMonth = document.getElementById("filter-month")
 let filterMonthDiv = document.querySelector("div#month")
@@ -249,15 +250,18 @@ previousBtn.addEventListener("click", ()=>{
 
 //show add transaction form
 let addTransaction = document.querySelector("#add-transaction")
-let transactionForm = document.querySelector("#add-transaction-form")
+let addtransactionForm = document.querySelector("#add-transaction-form")
+
+let transactionForm = document.querySelector("#transaction-form")
 let show = false
+
 addTransaction.addEventListener("click", ()=>{
     if (show!=false){
         show = !show
-        transactionForm.style.display = "flex";
+        addtransactionForm.style.display = "flex";
     } else {
         show = !show
-        transactionForm.style.display = "none";
+        addtransactionForm.style.display = "none";
     }
 })
 

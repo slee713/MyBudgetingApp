@@ -1,15 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
+    <meta name="UTF-8">
+    
 	<title>Budgeting App</title>
-    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" type="text/css" href="../css/index.css">
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+
+
+    <style>
+
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        
+        body{
+            font-family: "Poppins", sans-serif;
+        }
+        
+        .wave{
+            position: fixed;
+            height: 100%;
+            width: 100%;
+            Left: 0;
+            bottom: 0;
+            z-index: -1;
+        }
+
+        
+        #login-container{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        .avatar{
+            width: 200px;
+        }
+
+        #login-form {
+            width: 360px;
+        }
+        #login-form form h2{
+            font-size: 2.9rem;
+            text-transform: uppercase;
+            margin: 15px 0;
+            color: #333;
+        }
+     
+        </style>
+
 </head>
+
 <body>
+    <img class="wave" src="img/wanve.jpg">
+
+    </form>
     <div class="container">
         <div class = "header">
-            <h1>My Budgeting App</h1>
+            
         </div> 
         <div class = "nav-bar" style= "display: none;">
             <div id= "home">Home</div>
@@ -47,11 +99,14 @@
             <div class= "login" id="login-container">
                 
                 <form id="login-form">
-                    <label>Please Enter Username</label><br>
+                    <img class="avatar" src="img/avatar.png">
+                    <h2>Welcome</h2><br>
                     <input id="username">
                     <button type="submit">Login</button>
                 </form>
+
             </div>
+
             <div id="data-container" style="display: none;">
                 <div id="filter-select-container">
                     <div>

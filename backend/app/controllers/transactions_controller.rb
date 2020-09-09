@@ -1,4 +1,5 @@
 class TransactionsController < ApplicationController
+    
     def index
         user = User.find_by(username: params[:username])
         if params[:year]
