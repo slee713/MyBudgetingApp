@@ -63,7 +63,7 @@ function fetchUserData(username){
     })
 }
 
-//filter year event listener
+//filter year event listener adds month options to filter Month based on current year and month
 filterYear.addEventListener("change", ()=>{
     filterMonthDiv.style.display = "flex"
     filterMonth.innerHTML = ""
@@ -105,14 +105,11 @@ filterYear.addEventListener("change", ()=>{
     }
     fetch(transactions+username+`/${event.target.value}`)
     .then(resp => resp.json())
-    .then(selectedData => {
-        loadUserData(selectedData)
-    })
-
+    .then(selectedData => loadUserData(selectedData))
 })
 
 
-//load data for specific month for the user
+//load userdata for specific month for the user
 filterMonth.addEventListener("change", ()=>{
     tableContainer.style.display = "flex"
     let year = filterYear.value
@@ -197,6 +194,7 @@ function loadUserData(transactions){
             }
         }
     })
+    // start populating category filter 
     filterCategory.innerHTML = ""
     let empty = document.createElement("option")
     empty.innerText = "Select Category"
@@ -204,6 +202,7 @@ function loadUserData(transactions){
     all.setAttribute("value", "All")
     all.innerText = "All"
     filterCategory.append(empty, all)
+    //create option for each label available in the dataset
     labels.forEach(l => createOption(l))
 } 
 
@@ -227,10 +226,8 @@ function loadTableData(data){
     descriptionHeader.innerText = "Description"
     let priceHeader = document.createElement("th")
     priceHeader.innerText = "Price"
-
     let actionHeader = document.createElement("th")
     actionHeader.innerText = "Action"
-    
     tableColumnHeader.append(dateHeader, categoryHeader, descriptionHeader, priceHeader, actionHeader)
     table.append(tableColumnHeader)
     data.forEach(transaction => addTableRow(transaction))
@@ -257,7 +254,7 @@ function addTableRow(transaction){
     tableRow.append(date,category,description, price, actionBtns)
     table.append(tableRow)
 
-
+    // add event listener to edit button so it opens the edit form and preloads the data
     editBtn.addEventListener("click", () => {
         if (editFormDiv.style.display === "none"){
             editFormDiv.style.display = "flex"
@@ -270,7 +267,7 @@ function addTableRow(transaction){
             editFormDiv.style.display = "none"
         }
     })
-
+    // add event listener to delete button so it deletes row and updates chart and table
     deleteBtn.addEventListener("click", () => {
         let transactionID = parseInt(tableRow.dataset.num, 10)
         config = {
@@ -320,7 +317,7 @@ addTransactionBtn.addEventListener("click", ()=>{
     }
 })
 
-//submit a transaction and reload data
+//submit a transaction and reload data for the transaction month and year
 transactionForm.addEventListener("submit", ()=> {
     event.preventDefault();
     let date_of_transaction = event.target[0].value
@@ -342,8 +339,6 @@ transactionForm.addEventListener("submit", ()=> {
         })
     }
     fetch(transactions, config)
-        
-    
     .then(()=>{
         let date = new Date(date_of_transaction)
         let year = date.getFullYear()
@@ -362,7 +357,7 @@ transactionForm.addEventListener("submit", ()=> {
         })
 })
 
-// return to login page
+// return to login page and hide all elements
 let logout = document.querySelector("#logout")
 logout.addEventListener("click", ()=>{
     loginContainer.style.display = "flex"
@@ -386,14 +381,14 @@ filterCategory.addEventListener("change", ()=>{
 })
 
 
-
-
+//click on home to display main page (might want to make it the current month)
 home.addEventListener("click", ()=>{
     tableContainer.style.display = "none"
     filterMonthDiv.style.display = "none"
     fetchUserData(username)
 })
 
+//submit edit form to database and save. Load new data in chart and 
 editForm.addEventListener("submit", ()=>{
     event.preventDefault()
     config = {
@@ -411,9 +406,7 @@ editForm.addEventListener("submit", ()=>{
         })
     }
     fetch(transactions+event.target[0].value, config)
-    .then(res => res.json())
-    .then(updatedTransaction =>{
-        
+    .then(() => {
         let year = filterYear.value
         let month = filterMonth.value
         fetch(transactions+`${username}/${year}/${month}`)
@@ -425,6 +418,10 @@ editForm.addEventListener("submit", ()=>{
             editFormDiv.style.display= "none"
         })
     })
-   
-    
 })
+
+// things to add or consider
+// build out summary page
+// validations and show error message
+// user experience for new user
+// 
