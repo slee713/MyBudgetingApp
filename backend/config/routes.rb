@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   delete '/users/:username', to: 'users#destroy'
 
   get '/transactions', to: 'transactions#index'
-  get '/transactions/:username/', to: 'transactions#index' 
+  get '/transactions/:username/', to: 'transactions#index'
   get '/transactions/:username/:year', to: 'transactions#index' 
   get '/transactions/:username/:year/:month', to: 'transactions#index' 
   get '/transactions/:username/:year/:month/:category', to: 'transactions#index'
