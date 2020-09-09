@@ -75,6 +75,6 @@
 }
 
 
-.filter-select-container{
+#filter-select-container{
     flex-direction: row;
 }
