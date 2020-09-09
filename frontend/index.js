@@ -450,6 +450,7 @@ home.addEventListener("click", ()=>{
 editForm.addEventListener("submit", ()=>{
     event.preventDefault()
     let newDate = event.target[1].value
+    let revisedDate = new Date(newDate)
     config = {
         method: "PATCH",
         headers: {
@@ -466,16 +467,15 @@ editForm.addEventListener("submit", ()=>{
     }
     fetch(transactions+event.target[0].value, config)
     .then(() => {
-        let year = filterYear.value
-        let month = filterMonth.value
-        fetch(transactions+`${username}/${year}/${month}`)
-        .then(res=> res.json())
-        .then(updatedData => {
-            loadUserData(updatedData)
-            loadTableData(updatedData)
-            editForm.reset()
-            editFormDiv.style.display= "none"
+        fetch(transactions+`${username}/${revisedDate.getFullYear()}/${revisedDate.getMonth()+1}`)
+        .then(res=>res.json())
+        .then(transactions =>{
+            loadUserData(transactions)
+            loadTableData(transactions)
+            filterMonth.value = revisedDate.getMonth()+1
         })
+        // loadChartWithCurrentMonth(username)
+        editFormDiv.style.display= "none" 
     })
 })
 
