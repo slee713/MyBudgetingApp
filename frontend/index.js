@@ -31,8 +31,10 @@ loginForm.addEventListener("submit", () => {
     navBar.style.display = "flex"
     dataContainer.style.display = "flex"
     summaryDiv.style.display = "flex"
+    tableContainer.style.display = "flex"
     username = event.target[0].value
     fetchUserData(username)
+    loadChartWithCurrentMonth(username)
     loginForm.reset()
 })
 
@@ -43,7 +45,7 @@ function fetchUserData(username){
     .then(userData => {
         id = userData.id
         if (userData.transactions.length > 0){
-            loadUserData(userData.transactions)
+            // loadUserData(userData.transactions)
             // create options for filter based on year of transactions for user
             let year= []
             userData.transactions.forEach(transaction =>{
@@ -63,12 +65,31 @@ function fetchUserData(username){
                 option.innerText = yr
                 filterYear.append(option)
             })
+            filterYear.value = `${now.getFullYear()}`
+            let last = filterMonth.lastElementChild
+            while (last.value > now.getMonth()+1){
+                filterMonth.lastElementChild.remove()
+                last = filterMonth.lastElementChild
+            }
+
         }
+    })
+}
+
+function loadChartWithCurrentMonth(username){
+    fetch(transactions+`${username}/${now.getFullYear()}/${now.getMonth()+1}`)
+    .then(res => res.json())
+    .then(transactions => {
+        
+        filterMonth.value = now.getMonth()+1
+        loadUserData(transactions)
+        loadTableData(transactions)
     })
 }
 
 //filter year event listener adds month options to filter Month based on current year and month
 filterYear.addEventListener("change", ()=>{
+    tableContainer.style.display = "none"
     filterMonthDiv.style.display = "flex"
     filterMonth.innerHTML = ""
     let emptyOption = document.createElement("option")
@@ -420,9 +441,9 @@ filterCategory.addEventListener("change", ()=>{
 
 //click on home to display main page (might want to make it the current month)
 home.addEventListener("click", ()=>{
-    tableContainer.style.display = "none"
-    filterMonthDiv.style.display = "none"
-    fetchUserData(username)
+    // tableContainer.style.display = "none"
+    // filterMonthDiv.style.display = "none"
+    loadChartWithCurrentMonth(username)
 })
 
 //submit edit form to database and save. Load new data in chart and 
@@ -481,9 +502,9 @@ monthlyBudgetForm.addEventListener("submit", ()=>{
     let remaining = document.querySelector("#remaining")
     remaining.lastElementChild.innerText = total
     monthlyBudgetDiv.style.display = "none"
-    tableContainer.style.display = "none"
-    filterMonthDiv.style.display = "none"
-    fetchUserData(username)
+    // tableContainer.style.display = "none"
+    // filterMonthDiv.style.display = "none"
+    loadChartWithCurrentMonth(username)
     
     // if (filterYear.value!== "Select Year"){
     //     if (filterMonth.value!== "Select Month"){
