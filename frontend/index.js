@@ -345,6 +345,7 @@ function addTableRow(transaction){
             .then(updatedData => {
             loadUserData(updatedData)
              })
+            tableRow.remove()
         })
     })
 }
