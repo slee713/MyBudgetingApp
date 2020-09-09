@@ -428,6 +428,7 @@ home.addEventListener("click", ()=>{
 //submit edit form to database and save. Load new data in chart and 
 editForm.addEventListener("submit", ()=>{
     event.preventDefault()
+    let newDate = event.target[1].value
     config = {
         method: "PATCH",
         headers: {
@@ -501,7 +502,5 @@ monthlyBudgetForm.addEventListener("submit", ()=>{
 })
 
 // things to add or consider
-// build out summary page
 // validations and show error message
-// user experience for new user
-// 
+// when updating budget, update the summary section and chart based on current page
