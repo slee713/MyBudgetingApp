@@ -20,6 +20,10 @@ let url = "http://localhost:3000/users/"
 let transactions = "http://localhost:3000/transactions/"
 let now = new Date()
 
+
+//set standard monthly budget
+
+
 //load chart based on user data
 loginForm.addEventListener("submit", () => {
     event.preventDefault()
@@ -204,6 +208,39 @@ function loadUserData(transactions){
     filterCategory.append(empty, all)
     //create option for each label available in the dataset
     labels.forEach(l => createOption(l))
+
+    //
+    let total = document.querySelector("#period-total")
+    total.lastElementChild.innerText=summary
+    let monthlyBudgetForm = document.querySelector("#set-monthly-budget")
+    let travel = document.querySelector("#Travel")
+    travel.lastElementChild.innerText = "0"
+    let entertainment = document.querySelector("#Entertainment")
+    entertainment.lastElementChild.innerText = "0"
+    let groceries = document.querySelector("#Groceries")
+    groceries.lastElementChild.innerText = "0"
+    let transportation = document.querySelector("#Transportation")
+    transportation.lastElementChild.innerText = "0"
+    let shopping = document.querySelector("#Shopping")
+    shopping.lastElementChild.innerText = "0"
+    let bills = document.querySelector("#Bills")
+    bills.lastElementChild.innerText = "0"
+    let foodDrink = document.querySelector("#FoodDrink")
+    foodDrink.lastElementChild.innerText = "0"
+    let health = document.querySelector("#Health")
+    health.lastElementChild.innerText = "0"
+    let budgetTotal = 0
+    for(i=0; i<8; i++){
+        budgetTotal += parseFloat(monthlyBudgetForm.elements[i].value)
+    }
+    let remaining = document.querySelector("#remaining")
+    remaining.lastElementChild.innerText = round(budgetTotal,2)
+    
+    for (i=0; i<costs.length; i++){
+        let element=document.querySelector(`#${labels[i].split(" & ").join("")}`)
+        element.lastElementChild.innerText = round((costs[i]/budgetTotal)*100, 2)
+    }
+    
 } 
 
 //create filter option
@@ -431,6 +468,36 @@ monthlyBudgetBtn.addEventListener("click", ()=>{
         display = !display
         monthlyBudgetDiv.style.display = "none"
     }
+})
+
+let monthlyBudgetForm = document.querySelector("#set-monthly-budget")
+monthlyBudgetForm.addEventListener("submit", ()=>{
+    event.preventDefault()
+    let total = 0
+    for (i = 0; i<8; i++){
+        total = total + parseFloat(event.target[i].value)
+    }
+    let remaining = document.querySelector("#remaining")
+    remaining.lastElementChild.innerText = total
+    monthlyBudgetDiv.style.display = "none"
+    tableContainer.style.display = "none"
+    filterMonthDiv.style.display = "none"
+    fetchUserData(username)
+    
+    // if (filterYear.value!== "Select Year"){
+    //     if (filterMonth.value!== "Select Month"){
+    //         let URL = transactions+`${username}/${filterYear.value}/${filterMonth.value}`
+    //     } else {
+    //         let URL = transactions+`${username}/${filterYear.value}`
+    //     }
+    // } else {
+    //     let URL = transactions + username
+    // }
+    // fetch(URL)
+    // .then(res => res.json())
+    // .then(transactions => {
+    //     loadUserData(transactions)
+    // })
 })
 
 // things to add or consider
