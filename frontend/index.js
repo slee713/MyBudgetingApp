@@ -21,9 +21,6 @@ let transactions = "http://localhost:3000/transactions/"
 let now = new Date()
 
 
-//set standard monthly budget
-
-
 //load chart based on user data
 loginForm.addEventListener("submit", () => {
     event.preventDefault()
