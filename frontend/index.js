@@ -65,6 +65,8 @@ function fetchUserData(username){
                 option.innerText = yr
                 filterYear.append(option)
             })
+
+            //set year filter to current year and remove options for months that are past current month
             filterYear.value = `${now.getFullYear()}`
             let last = filterMonth.lastElementChild
             while (last.value > now.getMonth()+1){
@@ -76,18 +78,18 @@ function fetchUserData(username){
     })
 }
 
+//load chart with transactions for the current year and month for user
 function loadChartWithCurrentMonth(username){
     fetch(transactions+`${username}/${now.getFullYear()}/${now.getMonth()+1}`)
     .then(res => res.json())
     .then(transactions => {
-        
         filterMonth.value = now.getMonth()+1
         loadUserData(transactions)
         loadTableData(transactions)
     })
 }
 
-//filter year event listener adds month options to filter Month based on current year and month
+//filter year event listener adds month options to filter Month based on current year
 filterYear.addEventListener("change", ()=>{
     tableContainer.style.display = "none"
     filterMonthDiv.style.display = "flex"
@@ -219,7 +221,7 @@ function loadUserData(transactions){
             }
         }
     })
-    // start populating category filter 
+    // start populating category filter based on categories for specific data set
     filterCategory.innerHTML = ""
     let empty = document.createElement("option")
     empty.innerText = "Select Category"
@@ -230,7 +232,7 @@ function loadUserData(transactions){
     //create option for each label available in the dataset
     labels.forEach(l => createOption(l))
 
-    //
+    //resets the inner span element for the summary page to 0 so old data is removed
     let total = document.querySelector("#period-total")
     total.lastElementChild.innerText=summary
     let monthlyBudgetForm = document.querySelector("#set-monthly-budget")
@@ -250,6 +252,8 @@ function loadUserData(transactions){
     foodDrink.lastElementChild.innerText = "0"
     let health = document.querySelector("#Health")
     health.lastElementChild.innerText = "0"
+
+    //get sum of budget based on budget form
     let budgetTotal = 0
     for(i=0; i<8; i++){
         budgetTotal += parseFloat(monthlyBudgetForm.elements[i].value)
@@ -257,6 +261,7 @@ function loadUserData(transactions){
     let remaining = document.querySelector("#remaining")
     remaining.lastElementChild.innerText = round(budgetTotal,2)
     
+    //calculate the percentage of cost spent for that particular category and add to corrent summary line
     for (i=0; i<costs.length; i++){
         let element=document.querySelector(`#${labels[i].split(" & ").join("")}`)
         element.lastElementChild.innerText = round((costs[i]/budgetTotal)*100, 2)
@@ -396,6 +401,7 @@ transactionForm.addEventListener("submit", ()=> {
             price
         })
     }
+    //post transaction 
     fetch(transactions, config)
     .then(()=>{
         let date = new Date(date_of_transaction)
@@ -403,6 +409,7 @@ transactionForm.addEventListener("submit", ()=> {
         let month = date.getMonth()+1
         filterYear.value = year
         filterMonth.value = month
+        //fetch data for the transaction year and month
         fetch(transactions+`${username}/${year}/${month}`)
         .then(res => res.json())
         .then(transactions =>{
@@ -479,6 +486,7 @@ editForm.addEventListener("submit", ()=>{
     })
 })
 
+//show or hide monthly budget form
 let monthlyBudgetBtn = document.querySelector("#monthly-budget")
 let monthlyBudgetDiv = document.querySelector("#monthly-budget-container")
 let display = false
@@ -492,6 +500,7 @@ monthlyBudgetBtn.addEventListener("click", ()=>{
     }
 })
 
+//set monthly budget and add the values and change monthly budget total
 let monthlyBudgetForm = document.querySelector("#set-monthly-budget")
 monthlyBudgetForm.addEventListener("submit", ()=>{
     event.preventDefault()
@@ -502,26 +511,7 @@ monthlyBudgetForm.addEventListener("submit", ()=>{
     let remaining = document.querySelector("#remaining")
     remaining.lastElementChild.innerText = total
     monthlyBudgetDiv.style.display = "none"
-    // tableContainer.style.display = "none"
-    // filterMonthDiv.style.display = "none"
     loadChartWithCurrentMonth(username)
-    
-    // if (filterYear.value!== "Select Year"){
-    //     if (filterMonth.value!== "Select Month"){
-    //         let URL = transactions+`${username}/${filterYear.value}/${filterMonth.value}`
-    //     } else {
-    //         let URL = transactions+`${username}/${filterYear.value}`
-    //     }
-    // } else {
-    //     let URL = transactions + username
-    // }
-    // fetch(URL)
-    // .then(res => res.json())
-    // .then(transactions => {
-    //     loadUserData(transactions)
-    // })
 })
 
-// things to add or consider
-// validations and show error message
-// when updating budget, update the summary section and chart based on current page
+
