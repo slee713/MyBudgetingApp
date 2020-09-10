@@ -8,11 +8,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
 </head>
 <body >
-    <img class="background" src ="../css/background.jpg">
+    <img class="background" src ="../css/cropped-StockSnap_OR7D4PANCK.jpg">
     <div class="container">
         <div class = "nav-bar" style= "display: none;">
             <div id= "home">Home</div>
-            <div data-modal-target="#table-modal">View Transactions</div>
+            <!-- <div data-modal-target="#table-modal">View Transactions</div> -->
             <div data-modal-target="#transaction-modal" id="add-transaction">Add Transaction</div>
             <div data-modal-target="#budget-modal" id= "monthly-budget">Monthly Budget</div>
             <div data-modal-target="#user-modal" id= "edit-user">Edit User</div>
@@ -172,61 +172,64 @@
                 <button data-modal-target="#create-user-modal" id="create-user">Create Account</button>
             </div>
             <div id="data-container" style="display: none;">
-                <div class="chart-container">
-
-                    <div id="filter-select-container">
+                <div id="test">
+                    <div class="chart-container">
                         
-                        <label for="year">Filter by Year</label>
-                        <select name="year" id="filter-year">
-                        </select>
-                        <label  for="months">Filter by Month:</label>
-                        <select  name="months" id="filter-month" >
-                            <option value = "1">January</option>
-                            <option value = "2">February</option>
-                            <option value = "3">March</option>
-                            <option value = "4">April</option>
-                            <option value = "5">May</option>
-                            <option value = "6">June</option>
-                            <option value = "7">July</option>
-                            <option value = "8">August</option>
-                            <option value = "9">September</option>
-                            <option value = "10">October</option>
-                            <option value = "11">November</option>
-                            <option value = "12">December</option>
-                        </select>
-                        
+                        <div id="filter-select-container">
+                            
+                            <label for="year">Filter by Year</label>
+                            <select name="year" id="filter-year">
+                            </select>
+                            <label  for="months">Filter by Month:</label>
+                            <select  name="months" id="filter-month" >
+                                
+                                <option value = "1">January</option>
+                                <option value = "2">February</option>
+                                <option value = "3">March</option>
+                                <option value = "4">April</option>
+                                <option value = "5">May</option>
+                                <option value = "6">June</option>
+                                <option value = "7">July</option>
+                                <option value = "8">August</option>
+                                <option value = "9">September</option>
+                                <option value = "10">October</option>
+                                <option value = "11">November</option>
+                                <option value = "12">December</option>
+                            </select>
+                            
+                        </div>
+                        <div id="chart-container">
+                            <canvas id="myChart" ></canvas>
+                        </div>
                     </div>
-                    <div id="chart-container">
-                        <canvas id="myChart" ></canvas>
+                    <div id="summary" style="display: none;">
+                        <h4 id = "period-total">Total Spent This Period: $<span></span></h4>
+                        <h4 id = "remaining">Total Monthly Budget: $<span>0</span></h4>
+                        <p id="Travel">Percent Spent for Travel: <span>0</span>%</p>
+                        <p id="Entertainment">Percent Spent for Entertainment: <span>0</span>%</p>
+                        <p id="Groceries">Percent Spent for Groceries: <span>0</span>%</p>
+                        <p id="Transportation">Percent Spent for Transportation: <span>0</span>%</p>
+                        <p id="Shopping">Percent Spent for Shopping: <span>0</span>%</p>
+                        <p id="Bills">Percent Spent for Bills: <span>0</span>%</p>
+                        <p id="FoodDrink">Percent Spent for Food & Drink: <span>0</span>%</p>
+                        <p id="Health">Percent Spent for Health: <span>0</span>%</p>
                     </div>
                 </div>
-                <div id="summary" style="display: none;">
-                    <h4 id = "period-total">Total Spent This Period: $<span></span></h4>
-                    <h4 id = "remaining">Total Monthly Budget: $<span>0</span></h4>
-                    <p id="Travel">Percent Spent for Travel: <span>0</span>%</p>
-                    <p id="Entertainment">Percent Spent for Entertainment: <span>0</span>%</p>
-                    <p id="Groceries">Percent Spent for Groceries: <span>0</span>%</p>
-                    <p id="Transportation">Percent Spent for Transportation: <span>0</span>%</p>
-                    <p id="Shopping">Percent Spent for Shopping: <span>0</span>%</p>
-                    <p id="Bills">Percent Spent for Bills: <span>0</span>%</p>
-                    <p id="FoodDrink">Percent Spent for Food & Drink: <span>0</span>%</p>
-                    <p id="Health">Percent Spent for Health: <span>0</span>%</p>
+                <div id = "table-container" style="display: none;">
+                    <div class="table" >
+                        <div id="table-filter">
+                            <label for="category">Filter by Category</label>
+                            <select name = "category" id = "filter">
+                            </select>
+                        </div>
+                        <div id="table-data">
+                            <table id="table">
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div> 
-        <div id = "table-container" style="display: none;">
-            <div class="table" >
-                <div id="table-filter">
-                    <label for="category">Filter by Category</label>
-                    <select name = "category" id = "filter">
-                    </select>
-                </div>
-                <div id="table-data">
-                    <table id="table">
-                    </table>
-                </div>
-            </div>
-        </div>
     </div>
     <script type="text/javascript" src="index.js"></script>
     <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> -->
