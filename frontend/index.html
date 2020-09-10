@@ -2,15 +2,14 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Budgeting App</title>
+    <title>Budgeting App</title>
     <link rel="stylesheet" href="../css/index.css">
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous"> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
 </head>
-<body>
+<body >
+    <img class="background" src ="../css/background.jpg">
     <div class="container">
-        <div class = "header">
-            <h1>My Budgeting App</h1>
-        </div> 
         <div class = "nav-bar" style= "display: none;">
             <div id= "home">Home</div>
             <div data-modal-target="#transaction-modal" id="add-transaction">Add Transaction</div>
@@ -126,20 +125,23 @@
         </div>
         <div class = "body">
             <div class= "login" id="login-container">
+                <h1>My Budgeting App</h1>
                 <form id="login-form">
-                    <label>Please Enter Username</label><br>
-                    <input id="username">
-                    <button type="submit">Login</button>
+                    <div class="form-group">
+                        <label for="username">Please Enter Username</label><br>
+                        <input id="username" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-secondary">Login</button>
                 </form>
             </div>
             <div id="data-container" style="display: none;">
-                <div id="filter-select-container">
-                    <div>
+                <div class="chart-container">
+
+                    <div id="filter-select-container">
+                        
                         <label for="year">Filter by Year</label>
                         <select name="year" id="filter-year">
                         </select>
-                    </div>
-                    <div id="month" >
                         <label  for="months">Filter by Month:</label>
                         <select  name="months" id="filter-month" >
                             <option value = "1">January</option>
@@ -155,23 +157,24 @@
                             <option value = "11">November</option>
                             <option value = "12">December</option>
                         </select>
+                        
+                    </div>
+                    <div id="chart-container">
+                        <canvas id="myChart" ></canvas>
                     </div>
                 </div>
-                <div id="chart-container">
-                    <canvas id="myChart" ></canvas>
+                <div id="summary" style="display: none;">
+                    <h4 id = "period-total">Total Spent This Period: $<span></span></h4>
+                    <h4 id = "remaining">Total Monthly Budget: $<span>0</span></h4>
+                    <p id="Travel">Percent Spent for Travel: <span>0</span>%</p>
+                    <p id="Entertainment">Percent Spent for Entertainment: <span>0</span>%</p>
+                    <p id="Groceries">Percent Spent for Groceries: <span>0</span>%</p>
+                    <p id="Transportation">Percent Spent for Transportation: <span>0</span>%</p>
+                    <p id="Shopping">Percent Spent for Shopping: <span>0</span>%</p>
+                    <p id="Bills">Percent Spent for Bills: <span>0</span>%</p>
+                    <p id="FoodDrink">Percent Spent for Food & Drink: <span>0</span>%</p>
+                    <p id="Health">Percent Spent for Health: <span>0</span>%</p>
                 </div>
-            </div>
-            <div id="summary" style="display: none;">
-                <h4 id = "period-total">Total Spent This Period: $<span></span></h4>
-                <h4 id = "remaining">Total Monthly Budget: $<span>0</span></h4>
-                <h5 id="Travel">Percent Spent for Travel: <span>0</span>%</h5>
-                <h5 id="Entertainment">Percent Spent for Entertainment: <span>0</span>%</h5>
-                <h5 id="Groceries">Percent Spent for Groceries: <span>0</span>%</h5>
-                <h5 id="Transportation">Percent Spent for Transportation: <span>0</span>%</h5>
-                <h5 id="Shopping">Percent Spent for Shopping: <span>0</span>%</h5>
-                <h5 id="Bills">Percent Spent for Bills: <span>0</span>%</h5>
-                <h5 id="FoodDrink">Percent Spent for Food & Drink: <span>0</span>%</h5>
-                <h5 id="Health">Percent Spent for Health: <span>0</span>%</h5>
             </div>
         </div> 
         <div id = "table-container" style="display: none;">
@@ -188,6 +191,9 @@
             </div>
         </div>
     </div>
-	<script type="text/javascript" src="index.js"></script>
+    <script type="text/javascript" src="index.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script> -->
 </body>
 </html>

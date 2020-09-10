@@ -90,7 +90,6 @@ function loadChartWithCurrentMonth(username){
 //filter year event listener adds month options to filter Month based on current year
 filterYear.addEventListener("change", ()=>{
     tableContainer.style.display = "none"
-    filterMonthDiv.style.display = "flex"
     filterMonth.innerHTML = ""
     let emptyOption = document.createElement("option")
     emptyOption.innerText = "Select Month"
