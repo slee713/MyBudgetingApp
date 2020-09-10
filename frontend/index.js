@@ -21,6 +21,38 @@ let transactions = "http://localhost:3000/transactions/"
 let now = new Date()
 let editUsernameForm = document.querySelector("#edit-username")
 
+//load info based on new user form submission
+let createUserForm = document.querySelector("#create-user-form")
+createUserForm.addEventListener("submit", ()=>{
+    event.preventDefault()
+    let userformModal = document.getElementById("create-user-modal")
+    closeModal(userformModal)
+    loginContainer.style.display = "none"
+    navBar.style.display = "flex"
+    dataContainer.style.display = "flex"
+    summaryDiv.style.display = "flex"
+    tableContainer.style.display = "flex"
+    username = event.target[0].value
+    editUsernameForm.children[1].value = username
+    
+    config = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
+        body: JSON.stringify({
+            username
+        })
+    }
+    fetch(url, config)
+    .then(()=>{
+        fetchUserData(username)
+    })
+    createUserForm.reset()
+})
+
+
 //load chart based on user data
 loginForm.addEventListener("submit", () => {
     event.preventDefault()
@@ -42,6 +74,9 @@ function fetchUserData(username){
     .then(resp => resp.json())
     .then(userData => {
         id = userData.id
+        let emptyOption = document.createElement("option")
+        emptyOption.innerText = "Select Year"
+        filterYear.append(emptyOption)
         if (userData.transactions.length > 0){
             // loadUserData(userData.transactions)
             // create options for filter based on year of transactions for user
@@ -54,9 +89,6 @@ function fetchUserData(username){
                 }
             })
             filterYear.innerHTML=""
-            let emptyOption = document.createElement("option")
-            emptyOption.innerText = "Select Year"
-            filterYear.append(emptyOption)
             year.forEach(yr => {
                 let option = document.createElement("option")
                 option.setAttribute("value", `${yr}`)
@@ -66,13 +98,24 @@ function fetchUserData(username){
 
             //set year filter to current year and remove options for months that are past current month
             filterYear.value = `${now.getFullYear()}`
-            let last = filterMonth.lastElementChild
-            while (last.value > now.getMonth()+1){
-                filterMonth.lastElementChild.remove()
-                last = filterMonth.lastElementChild
-            }
-
+            // let last = filterMonth.lastElementChild
+            // while (last.value > now.getMonth()+1){
+            //     filterMonth.lastElementChild.remove()
+            //     last = filterMonth.lastElementChild
+            // }
+        } else {
+            let currentYearOption = document.createElement("option")
+            currentYearOption.setAttribute("value", `${now.getFullYear()}`)
+            currentYearOption.innerText = now.getFullYear()
+            filterYear.append(currentYearOption)
+            filterYear.value = `${now.getFullYear()}`
         }
+        let last = filterMonth.lastElementChild
+        while (last.value > now.getMonth()+1){
+            filterMonth.lastElementChild.remove()
+            last = filterMonth.lastElementChild
+        }
+        filterMonth.value = now.getMonth()+1
     })
 }
 
@@ -401,8 +444,12 @@ logout.addEventListener("click", ()=>{
     tableContainer.style.display = "none"
     filterMonthDiv.style.display = "none"
     summaryDiv.style.display = "none"
+    table.innerHTML = ""
+    let canvas = document.querySelector("canvas")
+    canvas.remove()
     filterYear.innerHTML = ""
     filterMonth.innerHTML = ""
+    //need to fix budgets belonging to specific user
 })
 
 //category filter for table

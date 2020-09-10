@@ -123,6 +123,21 @@
                 </form>
             </div>
         </div>
+
+        <div class = "modal" id="create-user-modal">
+            <div class = "modal-header">
+                <div class = "title">Create Account</div>
+                <button data-close-button class="close-button">&times;</button>
+            </div>
+            <div class="modal-form">
+                <form id="create-user-form">
+                    <label>Enter Username</label>
+                    <input type="text"><br>
+                    <button type="submit">Create Account</button>
+                </form>
+
+            </div>
+        </div>
         <div class = "body">
             <div class= "login" id="login-container">
                 <h1>My Budgeting App</h1>
@@ -133,6 +148,7 @@
                     </div>
                     <button type="submit" class="btn btn-secondary">Login</button>
                 </form>
+                <button data-modal-target="#create-user-modal" id="create-user">Create Account</button>
             </div>
             <div id="data-container" style="display: none;">
                 <div class="chart-container">
