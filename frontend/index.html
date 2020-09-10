@@ -13,15 +13,16 @@
         </div> 
         <div class = "nav-bar" style= "display: none;">
             <div id= "home">Home</div>
-            <div id="add-transaction">Add Transaction</div>
-            <div id= "monthly-budget">Monthly Budget</div>
-            <div data-modal-target="#modal" id= "edit-user">Edit User</div>
-            <div id= "logout">Logout</div>
+            <div data-modal-target="#transaction-modal" id="add-transaction">Add Transaction</div>
+            <div data-modal-target="#budget-modal" id= "monthly-budget">Monthly Budget</div>
+            <div data-modal-target="#user-modal" id= "edit-user">Edit User</div>
             <div id= "delete-user">Delete User</div>
+            <div id= "logout">Logout</div>
         </div>
 
-        <div class="modal" id="modal">
+        <div class="modal" id="user-modal">
             <div class="modal-header">
+                <div class="title">Edit User</div>
                 <button data-close-button class="close-button">&times;</button>
             </div>
             <div class = "modal-form">
@@ -34,58 +35,97 @@
         </div>
         <div id="overlay"></div>
 
-
-
-        <div class="form-container" id= "form-container" style="display: none;">
-            <form class="form" id="transaction-form">
-                <label for="date">Date</label>
-                <input type="date" name= "date"id="date">
-                <label for="category">Category</label>
-                <select name="category">
-                    <option>Select Category</option>
-                    <option value= "Travel">Travel</option>
-                    <option value= "Entertainment">Entertainment</option>
-                    <option value= "Groceries">Groceries</option>
-                    <option value= "Transportation">Transportation</option>
-                    <option value= "Shopping">Shopping</option>
-                    <option value= "Bills">Bills</option>
-                    <option value= "Food & Drink">Food & Drink</option>
-                    <option value= "Health">Health</option>
-                </select>
-                <label for="description">Description</label>
-                <input type="text" name="description">
-                <label for="price">Price</label>
-                <input type="text" name="price">
-                <button type="submit">Submit</button>
-            </form>
+        <div class="modal" id="transaction-modal">
+            <div class="modal-header">
+                <div class="title">Add Transaction</div>
+                <button data-close-button class ="close-button">&times;</button>
+            </div>
+            <div class = "modal-form">
+                <form class="form" id="transaction-form">
+                    <label for="date">Date</label>
+                    <input type="date" name= "date"id="date"><br>
+                    <label for="category">Category</label>
+                    <select name="category">
+                        <option>Select Category</option>
+                        <option value= "Travel">Travel</option>
+                        <option value= "Entertainment">Entertainment</option>
+                        <option value= "Groceries">Groceries</option>
+                        <option value= "Transportation">Transportation</option>
+                        <option value= "Shopping">Shopping</option>
+                        <option value= "Bills">Bills</option>
+                        <option value= "Food & Drink">Food & Drink</option>
+                        <option value= "Health">Health</option>
+                    </select><br>
+                    <label for="description">Description</label>
+                    <input type="text" name="description"><br>
+                    <label for="price">Price</label>
+                    <input type="text" name="price"><br>
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
         </div>
-        <div class="form-container" id= "monthly-budget-container" style="display: none;">
-            <form class= "form" id="set-monthly-budget">
-                <label>Travel Budget</label>
-                <input type= "text" value="100"><br>
-                <label>Entertainment Budget</label>
-                <input type= "text" value="100"><br>
-                <label>Groceries Budget</label>
-                <input type= "text" value="100"><br>
-                <label>Transportation Budget</label>
-                <input type= "text" value="100"><br>
-                <label>Shopping Budget</label>
-                <input type= "text" value="100"><br>
-                <label>Bill Budget</label>
-                <input type= "text" value="100"><br>
-                <label>Food & Drink Budget</label>
-                <input type= "text" value="100"><br>
-                <label>Health Budget</label>
-                <input type= "text" value="100"><br>
-                <br>
-                <button type="submit">Set Monthly Budgets</button>
-            </form>
+
+        <div class="modal" id="budget-modal">
+            <div class = "modal-header">
+                <div class="title">Set Monthly Budgets</div>
+                <button data-close-button class = "close-button">&times;</button>
+            </div>
+            <div class="modal-form">
+                <form class= "form" id="set-monthly-budget">
+                    <label>Travel Budget</label>
+                    <input type= "text" value="100"><br>
+                    <label>Entertainment Budget</label>
+                    <input type= "text" value="100"><br>
+                    <label>Groceries Budget</label>
+                    <input type= "text" value="100"><br>
+                    <label>Transportation Budget</label>
+                    <input type= "text" value="100"><br>
+                    <label>Shopping Budget</label>
+                    <input type= "text" value="100"><br>
+                    <label>Bill Budget</label>
+                    <input type= "text" value="100"><br>
+                    <label>Food & Drink Budget</label>
+                    <input type= "text" value="100"><br>
+                    <label>Health Budget</label>
+                    <input type= "text" value="100"><br>
+                    <br>
+                    <button type="submit">Set Monthly Budgets</button>
+                </form>
+            </div>
         </div>
-        
-        
+
+        <div class="modal" id="edit-transaction-modal">
+            <div class = "modal-header">
+                <div class = "title">Edit Transaction</div>
+                <button data-close-button class ="close-button">&times;</button>
+            </div>
+            <div class="modal-form">
+                <form id="edit-form">
+                    <input type="hidden">
+                    <label for="date">Date</label>
+                    <input type="date" name= "date"><br>
+                    <label for="category">Category</label>
+                    <select name="category">
+                        <option>Select Category</option>
+                        <option value= "Travel">Travel</option>
+                        <option value= "Entertainment">Entertainment</option>
+                        <option value= "Groceries">Groceries</option>
+                        <option value= "Transportation">Transportation</option>
+                        <option value= "Shopping">Shopping</option>
+                        <option value= "Bills">Bills</option>
+                        <option value= "Food & Drink">Food & Drink</option>
+                        <option value= "Health">Health</option>
+                    </select><br>
+                    <label for="description">Description</label>
+                    <input type="text" name="description"><br>
+                    <label for="price">Price</label>
+                    <input type="text" name="price"><br>
+                    <button type="submit">Update</button>
+                </form>
+            </div>
+        </div>
         <div class = "body">
             <div class= "login" id="login-container">
-                
                 <form id="login-form">
                     <label>Please Enter Username</label><br>
                     <input id="username">
@@ -135,30 +175,6 @@
             </div>
         </div> 
         <div id = "table-container" style="display: none;">
-            <div id ="edit" style = "display: none;">
-                <form id="edit-form">
-                    <input type="hidden">
-                    <label for="date">Date</label>
-                    <input type="date" name= "date">
-                    <label for="category">Category</label>
-                    <select name="category">
-                        <option>Select Category</option>
-                        <option value= "Travel">Travel</option>
-                        <option value= "Entertainment">Entertainment</option>
-                        <option value= "Groceries">Groceries</option>
-                        <option value= "Transportation">Transportation</option>
-                        <option value= "Shopping">Shopping</option>
-                        <option value= "Bills">Bills</option>
-                        <option value= "Food & Drink">Food & Drink</option>
-                        <option value= "Health">Health</option>
-                    </select>
-                    <label for="description">Description</label>
-                    <input type="text" name="description">
-                    <label for="price">Price</label>
-                    <input type="text" name="price">
-                    <button type="submit">Update</button>
-                </form>
-            </div>
             <div class="table" >
                 <div id="table-filter">
                     <label for="category">Filter by Category</label>
@@ -168,10 +184,6 @@
                 <div id="table-data">
                     <table id="table">
                     </table>
-                </div>
-                <div class="pageturn">
-                    <p class="pageturnButton" id="previous"><</p>
-                    <p class="pageturnButton" id="next">></p>
                 </div>
             </div>
         </div>

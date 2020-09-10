@@ -16,7 +16,9 @@ categories = ["Food & Drink", "Shopping", "Travel", "Transportation", "Bills", "
     Transaction.create(user: steven, category: categories.sample, price: rand(0.00...100.00).round(2), date_of_transaction: Date.parse("2020/#{rand(01..8)}/#{rand(1..20)}"), description: Faker::Company.name)
     Transaction.create(user: steven, category: categories.sample, price: rand(0.00...100.00).round(2), date_of_transaction: Date.parse("2019/#{rand(01..12)}/#{rand(1..20)}"), description: Faker::Company.name)
 end
-
+15.times do
+    Transaction.create(user: steven, category: categories.sample, price: rand(0.00...100.00).round(2), date_of_transaction: Date.parse("2020/09/#{rand(1..10)}"), description: Faker::Company.name)
+end 
 
 michael = User.create(username: "mike")
 

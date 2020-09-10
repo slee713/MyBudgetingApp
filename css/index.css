@@ -105,8 +105,13 @@
     padding: 10px 15px;
     display: flex;
     justify-content: space-between;
-    align-items: right;
-    flex-direction: row-reverse;
+    align-items: center;
+    border-bottom: 1px solid black;
+}
+
+.modal-header .title {
+    font-size: 1.25rem;
+    font-weight: bold;
 }
 
 .modal .close-button {

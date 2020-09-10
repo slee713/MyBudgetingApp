@@ -308,8 +308,9 @@ function addTableRow(transaction){
     price.innerText = `$${transaction.price}`
     let actionBtns = document.createElement("td")
     let editBtn = document.createElement("button")
-    let deleteBtn = document.createElement("button")
     editBtn.innerText = "Edit"
+    editBtn.setAttribute("data-modal-target","#edit-transaction-modal")
+    let deleteBtn = document.createElement("button")
     deleteBtn.innerText = "Delete"
     actionBtns.append(editBtn, deleteBtn)
     tableRow.append(date,category,description, price, actionBtns)
@@ -317,17 +318,15 @@ function addTableRow(transaction){
 
     // add event listener to edit button so it opens the edit form and preloads the data
     editBtn.addEventListener("click", () => {
-        if (editFormDiv.style.display === "none"){
-            editFormDiv.style.display = "flex"
-            editForm.children[0].value = transaction.id
-            editForm.children[2].value = transaction.date_of_transaction
-            editForm.children[4].value = transaction.category
-            editForm.children[6].value = transaction.description
-            editForm.children[8].value = transaction.price
-        }else {
-            editFormDiv.style.display = "none"
-        }
+        let editTransactionModal = document.getElementById("edit-transaction-modal")
+        openModal(editTransactionModal)
+        editForm.children[0].value = transaction.id
+        editForm.children[2].value = transaction.date_of_transaction
+        editForm.children[5].value = transaction.category
+        editForm.children[8].value = transaction.description
+        editForm.children[11].value = transaction.price
     })
+
     // add event listener to delete button so it deletes row and updates chart and table
     deleteBtn.addEventListener("click", () => {
         let transactionID = parseInt(tableRow.dataset.num, 10)
@@ -348,44 +347,16 @@ function addTableRow(transaction){
     })
 }
 
-// click next button to increment page and load table
-let nextBtn = document.querySelector("#next")
-nextBtn.addEventListener("click", () => {
-    page = page + 1
-    fetchTable(page)
-})
-
-// click previous button to decrement page and load table
-let previousBtn = document.querySelector("#previous")
-previousBtn.addEventListener("click", ()=>{
-    if (page>1){
-        page -= 1
-        fetchTable(page)
-    }
-})
-
-//show add transaction form
-let addTransactionBtn = document.querySelector("#add-transaction")
-let transactionFormDiv = document.querySelector("#form-container")
-let transactionForm = document.querySelector("#transaction-form")
-let show = false
-addTransactionBtn.addEventListener("click", ()=>{
-    if (show!=false){
-        show = !show
-        transactionFormDiv.style.display = "flex";
-    } else {
-        show = !show
-        transactionFormDiv.style.display = "none";
-    }
-})
-
 //submit a transaction and reload data for the transaction month and year
+let transactionForm = document.querySelector("#transaction-form")
 transactionForm.addEventListener("submit", ()=> {
     event.preventDefault();
     let date_of_transaction = event.target[0].value
     let category = event.target[1].value
     let description = event.target[2].value
     let price = parseFloat(event.target[3].value, 10)
+    let addTransactionModal = document.getElementById("transaction-modal")
+    closeModal(addTransactionModal)
     config = {
         method: "POST",
         headers: {
@@ -415,10 +386,12 @@ transactionForm.addEventListener("submit", ()=> {
             tableContainer.style.display = "flex"
             loadUserData(transactions)
             loadTableData(transactions)
-                transactionForm.reset()
-                transactionFormDiv.style.display = "none"
-            })
+            transactionForm.reset()
+            transactionFormDiv.style.display = "none"
+            let addTransactionModal = document.getElementById("transaction-modal")
+            closeModal(addTransactionModal)
         })
+    })
 })
 
 // return to login page and hide all elements
@@ -447,8 +420,6 @@ filterCategory.addEventListener("change", ()=>{
 
 //click on home to display main page (might want to make it the current month)
 home.addEventListener("click", ()=>{
-    // tableContainer.style.display = "none"
-    // filterMonthDiv.style.display = "none"
     loadChartWithCurrentMonth(username)
 })
 
@@ -457,6 +428,8 @@ editForm.addEventListener("submit", ()=>{
     event.preventDefault()
     let newDate = event.target[1].value
     let revisedDate = new Date(newDate)
+    let editTransactionModal = document.getElementById("edit-transaction-modal")
+    closeModal(editTransactionModal)
     config = {
         method: "PATCH",
         headers: {
@@ -481,36 +454,22 @@ editForm.addEventListener("submit", ()=>{
             filterMonth.value = revisedDate.getMonth()+1
         })
         // loadChartWithCurrentMonth(username)
-        editFormDiv.style.display= "none" 
     })
-})
-
-//show or hide monthly budget form
-let monthlyBudgetBtn = document.querySelector("#monthly-budget")
-let monthlyBudgetDiv = document.querySelector("#monthly-budget-container")
-let display = false
-monthlyBudgetBtn.addEventListener("click", ()=>{
-    if (!display){
-        display = !display
-        monthlyBudgetDiv.style.display = "flex"
-    } else {
-        display = !display
-        monthlyBudgetDiv.style.display = "none"
-    }
 })
 
 //set monthly budget and add the values and change monthly budget total
 let monthlyBudgetForm = document.querySelector("#set-monthly-budget")
 monthlyBudgetForm.addEventListener("submit", ()=>{
     event.preventDefault()
+    let budgetModal = document.getElementById("budget-modal")
+    closeModal(budgetModal)
+    loadChartWithCurrentMonth(username)
     let total = 0
     for (i = 0; i<8; i++){
         total = total + parseFloat(event.target[i].value)
     }
     let remaining = document.querySelector("#remaining")
     remaining.lastElementChild.innerText = total
-    monthlyBudgetDiv.style.display = "none"
-    loadChartWithCurrentMonth(username)
 })
 
 // delete user account
@@ -571,6 +530,8 @@ overlay.addEventListener("click", ()=>{
 //submit username
 editUsernameForm.addEventListener("submit",()=> {
     event.preventDefault()
+    let editModal = document.getElementById("user-modal")
+    closeModal(editModal)
     username = event.target[0].value
     config = {
         method: "PATCH",
@@ -583,6 +544,4 @@ editUsernameForm.addEventListener("submit",()=> {
         })
     }
     fetch(url+id, config)
-    let editModal = document.querySelector("div#modal")
-    closeModal(editModal)
 })
