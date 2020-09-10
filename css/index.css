@@ -60,6 +60,7 @@
 }
 
 .login {
+    flex-direction: column;
     margin-left: auto;
     margin-right:auto;
 }
