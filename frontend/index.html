@@ -6,13 +6,173 @@
     <link rel="stylesheet" href="../css/index.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
 </head>
+
+<style>
+
+    *{
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+    * {
+        color:white 
+    }
+    
+    body{
+        font-family: "Poppins", sans-serif;
+    }
+    
+    .wave{
+        position: fixed;
+        height: 100%;
+        width: 100%;
+        Left: 0;
+        bottom: 0;
+        z-index: -1;
+    }
+
+    .login {
+        position: fixed; /* or absolute */
+         top: 25%;
+        left: 37%;
+        margin: auto;
+        width: 500px;
+        max-width: 90%;
+        
+
+    }
+    .login form {
+
+        width: 100%;
+        height: 100%;
+        padding: 20px;
+        
+background-color:rgb(0,0,0,0.6);
+        border-radius: 4px;
+        box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+    }
+
+    .login form h2{
+        text-align: center;
+        margin-bottom: 24px;
+        color:white
+
+    }
+
+    .login form .form-control{
+        
+        width: 100%;
+        height: 40px;
+background-color:rgb(0,0,0,0.6);
+        border-radius: 4px;
+        border: 1px solid silver;
+        margin: 10px 0 18px 0;
+        padding: 0 10px;
+    }
+
+    .login form .btn{
+        margin: 20px;
+        margin-left: 50%;
+        transform: translateX(-50%);
+        width: 120px;
+        height: 34px;
+        border: none;
+        outline: none;
+        background: #27a327;
+        cursor: pointer;
+        font-size: 16px;
+        text-transform: uppercase;
+        color: white;
+        border-radius: 4px;
+        transition: .3;
+
+    }
+    .login form .btn:hover{
+        opacity: .7;
+
+    }
+
+    #chart-container {
+
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+background-color:rgb(0,0,0,0.6);
+    border-radius: 4px;
+    box-shadow: 0 8px 16px rgba(0,0,0,.3);
+    }
+    .nav-bar {
+
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+background-color:rgb(0,0,0,0.6);
+    border-radius: 4px;
+    box-shadow: 0 8px 16px rgba(0,0,0,.3);
+    }
+
+    #filter-select-container{
+width: 100%;
+height: 100%;
+padding: 20px;
+background-color:rgb(0,0,0,0.6);
+border-radius: 4px;
+box-shadow: 0 8px 16px rgba(0,0,0,.3);
+}
+
+
+
+
+    .form{
+width: 100%;
+height: 100%;
+padding: 20px;
+background-color:rgb(0,0,0,0.6);
+border-radius: 4px;
+box-shadow: 0 8px 16px rgba(0,0,0,.3);
+}
+#summary{
+
+width: 20%;
+height: 100%;
+padding: 20px;
+background-color:rgb(0,0,0,0.6);
+border-radius: 4px;
+box-shadow: 0 8px 16px rgba(0,0,0,.3);
+}
+
+#table-filter{
+
+width: 20%;
+height: 100%;
+padding: 20px;
+background-color:rgb(0,0,0,0.6);
+border-radius: 4px;
+box-shadow: 0 8px 16px rgba(0,0,0,.3);
+}
+#table-container{
+
+width: 20%;
+height: 100%;
+padding: 20px;
+background-color:rgb(0,0,0,0.6);
+border-radius: 4px;
+box-shadow: 0 8px 16px rgba(0,0,0,.3);
+}
+
+ 
+    </style>
+
+</head>
+
 <body>
+<img class="wave" src="img/wave.jfif">
+
     <div class="container">
         <div class = "header">
-            <h1>My Budgeting App</h1>
         </div> 
         <div class = "nav-bar" style= "display: none;">
-            <div id= "home">Home</div>
+            <div id= "home">Alpha Books</div>
             <div id="add-transaction">Add Transaction</div>
             <div id= "monthly-budget">Monthly Budget</div>
             <div id= "logout">Logout</div>
@@ -70,14 +230,17 @@
             <div class= "login" id="login-container">
                 
                 <form id="login-form">
-                    <label>Please Enter Username</label><br>
+                    <!-- <img class="avatar" src="img/avatar.png"> -->
+                    
+                    <h2>Login</h2><br>
+                    <label> Username </label>
                     <input id="username">
-                    <button type="submit">Login</button>
+                    <button type="submit" class="btn">Login</button>
                 </form>
             </div>
             <div id="data-container" style="display: none;">
                 <div id="filter-select-container">
-                    <div>
+                    <div id="year">
                         <label for="year">Filter by Year</label>
                         <select name="year" id="filter-year">
                         </select>
