@@ -12,6 +12,7 @@
     <div class="container">
         <div class = "nav-bar" style= "display: none;">
             <div id= "home">Home</div>
+            <div data-modal-target="#table-modal">View Transactions</div>
             <div data-modal-target="#transaction-modal" id="add-transaction">Add Transaction</div>
             <div data-modal-target="#budget-modal" id= "monthly-budget">Monthly Budget</div>
             <div data-modal-target="#user-modal" id= "edit-user">Edit User</div>
@@ -135,9 +136,29 @@
                     <input type="text"><br>
                     <button type="submit">Create Account</button>
                 </form>
-
             </div>
         </div>
+
+        <!-- <div class = "modal" id="table-modal">
+            <div class = "modal-header">
+                <div class = "title">Transactions</div>
+                <button data-close-button class = "close-button">&times;</button>
+            </div>
+            <div class = "modal-form">
+                <div class="table" >
+                    <div id="table-filter">
+                        <label for="category">Filter by Category</label>
+                        <select name = "category" id = "filter">
+                        </select>
+                    </div>
+                    <div id="table-data">
+                        <table id="table">
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+
         <div class = "body">
             <div class= "login" id="login-container">
                 <h1>My Budgeting App</h1>
