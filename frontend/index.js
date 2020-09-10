@@ -19,7 +19,7 @@ let home = document.querySelector("#home")
 let url = "http://localhost:3000/users/"
 let transactions = "http://localhost:3000/transactions/"
 let now = new Date()
-
+let editUsernameForm = document.querySelector("#edit-username")
 
 //load chart based on user data
 loginForm.addEventListener("submit", () => {
@@ -30,6 +30,7 @@ loginForm.addEventListener("submit", () => {
     summaryDiv.style.display = "flex"
     tableContainer.style.display = "flex"
     username = event.target[0].value
+    editUsernameForm.children[1].value = username
     fetchUserData(username)
     loadChartWithCurrentMonth(username)
     loginForm.reset()
@@ -512,4 +513,76 @@ monthlyBudgetForm.addEventListener("submit", ()=>{
     loadChartWithCurrentMonth(username)
 })
 
+// delete user account
+let deleteUserBtn = document.querySelector("#delete-user")
+deleteUserBtn.addEventListener("click", () => {
+    config = {
+        method: "DELETE"
+    }
+    fetch(url+id, config)
+    loginContainer.style.display = "flex"
+    navBar.style.display = "none"
+    dataContainer.style.display = "none"
+    tableContainer.style.display = "none"
+    filterMonthDiv.style.display = "none"
+    summaryDiv.style.display = "none"
+    filterYear.innerHTML = ""
+    filterMonth.innerHTML = ""
+})
 
+// open and close edit username form modal
+const openModalButtons = document.querySelectorAll("[data-modal-target]")
+const closeModalButtons = document.querySelectorAll("[data-close-button]")
+const overlay = document.getElementById('overlay')
+
+openModalButtons.forEach(button => {
+    button.addEventListener("click", ()=>{
+        const modal = document.querySelector(button.dataset.modalTarget)
+        openModal(modal)
+    })
+})
+
+closeModalButtons.forEach(button => {
+    button.addEventListener("click", ()=>{
+        const modal = button.closest('.modal')
+        closeModal(modal)
+    })
+})
+
+function openModal(modal){
+    if (modal == null) return
+    modal.classList.add('active')
+    overlay.classList.add('active')
+}
+
+function closeModal(modal){
+    if (modal == null) return
+    modal.classList.remove('active')
+    overlay.classList.remove('active')
+}
+
+overlay.addEventListener("click", ()=>{
+    const modals = document.querySelectorAll('.modal.active')
+    modals.forEach(modal => {
+        closeModal(modal)
+    })
+})
+
+//submit username
+editUsernameForm.addEventListener("submit",()=> {
+    event.preventDefault()
+    username = event.target[0].value
+    config = {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
+        body: JSON.stringify({
+            username: event.target[0].value
+        })
+    }
+    fetch(url+id, config)
+    let editModal = document.querySelector("div#modal")
+    closeModal(editModal)
+})
