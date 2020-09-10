@@ -386,7 +386,6 @@ transactionForm.addEventListener("submit", ()=> {
             loadUserData(transactions)
             loadTableData(transactions)
             transactionForm.reset()
-            transactionFormDiv.style.display = "none"
             let addTransactionModal = document.getElementById("transaction-modal")
             closeModal(addTransactionModal)
         })
@@ -488,11 +487,12 @@ deleteUserBtn.addEventListener("click", () => {
     filterMonth.innerHTML = ""
 })
 
-// open and close edit username form modal
+// select all modal buttons
 const openModalButtons = document.querySelectorAll("[data-modal-target]")
 const closeModalButtons = document.querySelectorAll("[data-close-button]")
 const overlay = document.getElementById('overlay')
 
+//iterate through all modal buttons and add event listeners to open Modal
 openModalButtons.forEach(button => {
     button.addEventListener("click", ()=>{
         const modal = document.querySelector(button.dataset.modalTarget)
@@ -500,6 +500,7 @@ openModalButtons.forEach(button => {
     })
 })
 
+//iterate through all close buttons to add event listeneres to close modal
 closeModalButtons.forEach(button => {
     button.addEventListener("click", ()=>{
         const modal = button.closest('.modal')
@@ -507,18 +508,21 @@ closeModalButtons.forEach(button => {
     })
 })
 
+//open modal 
 function openModal(modal){
     if (modal == null) return
     modal.classList.add('active')
     overlay.classList.add('active')
 }
 
+//close modal
 function closeModal(modal){
     if (modal == null) return
     modal.classList.remove('active')
     overlay.classList.remove('active')
 }
 
+//add eventlistener to close modal whenever you click outside of modal
 overlay.addEventListener("click", ()=>{
     const modals = document.querySelectorAll('.modal.active')
     modals.forEach(modal => {
@@ -526,7 +530,7 @@ overlay.addEventListener("click", ()=>{
     })
 })
 
-//submit username
+//edit current username
 editUsernameForm.addEventListener("submit",()=> {
     event.preventDefault()
     let editModal = document.getElementById("user-modal")
