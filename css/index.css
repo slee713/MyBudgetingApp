@@ -5,7 +5,14 @@
    left:0;
    bottom:0;
    z-index: -1;
+   padding-top:0px;
 }
+
+body{
+    padding: 0;
+    margin: 0;
+}
+
 
 .container {
     display: flex;
@@ -19,12 +26,17 @@
 }
 
 .nav-bar {
+    position: fixed;
     flex-direction: row;
     justify-content: space-evenly;
     color: white;
-    padding-top: 7px;
+    padding-top: 10px;
     height: 30px;
+    width:100%;
+    margin-bottom: 10px;
+    background-color: rgba(0,0,0);
 }
+
 
 .body{
     display:flex;
@@ -37,10 +49,10 @@
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    margin-top: 20px;
+    margin-top: 40px;
     width: 90%;
     height: auto;
-    background-color: rgba(255,255,255, 0.6);
+    background-color: rgba(255,255,255, 0.75);
     border: 1px solid black;
     border-radius: 10px;
     padding: 20px;
@@ -69,7 +81,19 @@
     flex-direction: column;
     margin-left: auto;
     margin-right:auto;
+    background-color: rgba(255,255,255, 0.75);
+    border: 1px solid black;
+    border-radius: 10px;
+    margin-top: 10%;
+    padding: 20px;
 }
+#create-container{
+    display: flex;
+    flex-direction:row;
+    justify-content: space-evenly;
+}
+
+
 .table {
     display: flex;
     flex-direction:column;
@@ -112,7 +136,7 @@
 
 #summary{
     flex-direction: column;
-    margin-left: 100px;
+    margin-left: 70px;
 }
 
 .modal {
@@ -156,8 +180,14 @@
 }
 
 .modal-form {
-    padding: 20px 40px;
+    padding: 22px 40px;
+    display: flex;
+    flex-direction:row;
+    justify-content: space-evenly;
 }
+
+
+
 #edit-username{
     width:auto;
 }

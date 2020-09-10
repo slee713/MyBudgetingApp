@@ -170,9 +170,9 @@ filterYear.addEventListener("change", ()=>{
             }
         }
     }
-    fetch(transactions+username+`/${event.target.value}`)
-    .then(resp => resp.json())
-    .then(selectedData => loadUserData(selectedData))
+    // fetch(transactions+username+`/${event.target.value}`)
+    // .then(resp => resp.json())
+    // .then(selectedData => loadUserData(selectedData))
 })
 
 
@@ -243,7 +243,7 @@ function loadUserData(transactions){
             // maintainAspectRatio: false,
             legend:{
                 display: true,
-                position: 'right',
+                position: 'bottom',
                 labels: {
                     fontColor: '#000'
                 }
@@ -473,6 +473,8 @@ editForm.addEventListener("submit", ()=>{
     event.preventDefault()
     let newDate = event.target[1].value
     let revisedDate = new Date(newDate)
+    let year = revisedDate.getFullYear()
+    let month = revisedDate.getMonth() + 2
     let editTransactionModal = document.getElementById("edit-transaction-modal")
     closeModal(editTransactionModal)
     config = {
@@ -491,12 +493,12 @@ editForm.addEventListener("submit", ()=>{
     }
     fetch(transactions+event.target[0].value, config)
     .then(() => {
-        fetch(transactions+`${username}/${revisedDate.getFullYear()}/${revisedDate.getMonth()+1}`)
+        fetch(transactions+`${username}/${year}/${month}`)
         .then(res=>res.json())
         .then(transactions =>{
             loadUserData(transactions)
             loadTableData(transactions)
-            filterMonth.value = revisedDate.getMonth()+1
+            filterMonth.value = month
         })
         // loadChartWithCurrentMonth(username)
     })

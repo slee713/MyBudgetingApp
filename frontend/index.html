@@ -133,8 +133,8 @@
             <div class="modal-form">
                 <form id="create-user-form">
                     <label>Enter Username</label>
-                    <input type="text"><br>
-                    <button type="submit">Create Account</button>
+                    <input type="text">
+                    <span><button type="submit">Create Account</button></span>
                 </form>
             </div>
         </div>
@@ -161,15 +161,16 @@
 
         <div class = "body">
             <div class= "login" id="login-container">
-                <h1>My Budgeting App</h1>
+                <h1 style="text-align: center;">My Budgeting App</h1>
                 <form id="login-form">
-                    <div class="form-group">
-                        <label for="username">Please Enter Username</label><br>
-                        <input id="username" class="form-control">
-                    </div>
-                    <button type="submit" class="btn btn-secondary">Login</button>
-                </form>
-                <button data-modal-target="#create-user-modal" id="create-user">Create Account</button>
+                    <label for="username">Please Enter Username</label>
+                    <input id="username" class="form-control">  
+                    <span><button type="submit" class="btn btn-secondary">Login</button></span>
+                </form><br>
+                <h5 style="text-align: center;">OR</h5>
+                <div id ="create-container">
+                    <button data-modal-target="#create-user-modal" id="create-user">Create Account</button>
+                </div>
             </div>
             <div id="data-container" style="display: none;">
                 <div id="test">
