@@ -237,7 +237,7 @@ function loadUserData(transactions){
         options: {
             title:{
                 display: true,
-                text: `Spending Summary - Total: $${summary}`,
+                text: `Spending Summary`,
                 fontSize: 30,
                 fontColor: "black",
             },
@@ -274,8 +274,8 @@ function loadUserData(transactions){
     labels.forEach(l => createOption(l))
 
     //resets the inner span element for the summary page to 0 so old data is removed
-    // let total = document.querySelector("#period-total")
-    // total.lastElementChild.innerText=summary
+    let total = document.querySelector("#period-total")
+    total.lastElementChild.innerText=summary
     let monthlyBudgetForm = document.querySelector("#set-monthly-budget")
     let travel = document.querySelector("#Travel")
     travel.lastElementChild.innerText = "0"

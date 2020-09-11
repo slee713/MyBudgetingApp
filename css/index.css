@@ -84,6 +84,7 @@ body{
 }
 #filter-select-container{
     margin-bottom: 10px;
+    margin-top: 20px;
 }
 #table-container {
     flex-direction: column;

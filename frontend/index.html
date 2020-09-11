@@ -179,36 +179,36 @@
                 <div id="test">
                     <div class="chart-container">
                         
-                        <div id="filter-select-container">
-                            
-                            <label for="year">Filter by Year</label>
-                            <select name="year" id="filter-year">
-                            </select>
-                            <label  for="months">Filter by Month:</label>
-                            <select  name="months" id="filter-month" >
-                                
-                                <option value = "1">January</option>
-                                <option value = "2">February</option>
-                                <option value = "3">March</option>
-                                <option value = "4">April</option>
-                                <option value = "5">May</option>
-                                <option value = "6">June</option>
-                                <option value = "7">July</option>
-                                <option value = "8">August</option>
-                                <option value = "9">September</option>
-                                <option value = "10">October</option>
-                                <option value = "11">November</option>
-                                <option value = "12">December</option>
-                            </select>
-                            
-                        </div>
                         <div id="chart-container">
                             <canvas id="myChart" ></canvas>
                         </div>
+                                    <div id="filter-select-container">
+                                        
+                                        <label for="year" style="margin-left: 10%;">Filter by Year</label>
+                                        <select name="year" id="filter-year">
+                                        </select>
+                                        <label  for="months" style="margin-left: 30px;">Filter by Month:</label>
+                                        <select  name="months" id="filter-month" >
+                                            
+                                            <option value = "1">January</option>
+                                            <option value = "2">February</option>
+                                            <option value = "3">March</option>
+                                            <option value = "4">April</option>
+                                            <option value = "5">May</option>
+                                            <option value = "6">June</option>
+                                            <option value = "7">July</option>
+                                            <option value = "8">August</option>
+                                            <option value = "9">September</option>
+                                            <option value = "10">October</option>
+                                            <option value = "11">November</option>
+                                            <option value = "12">December</option>
+                                        </select>
+                                        
+                                    </div>
                     </div>
                     <div id="summary" style="display: none;">
-                        <!-- <h4 id = "period-total">Total Spent This Period: $<span></span></h4> -->
-                        <h4 id = "remaining">Total Monthly Budget: $<span>0</span></h4>
+                        <strong><p id = "period-total" style="color: green;">Total Spent This Period: <span style="color: black;">$</span><span style="color: black;"></span></p></strong>
+                        <strong><p id = "remaining" style="color: blue;">Total Monthly Budget: <span style="color:black">$</span><span style="color: black;">0</span></p></strong>
                         <p id="Travel">Percent Spent for Travel: <span>0</span>%</p>
                         <p id="Entertainment">Percent Spent for Entertainment: <span>0</span>%</p>
                         <p id="Groceries">Percent Spent for Groceries: <span>0</span>%</p>
