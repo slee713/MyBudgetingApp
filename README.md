@@ -1,12 +1,10 @@
-# Budget App
-
-![alt text](https://github.com/slee713/Trip_Tracker/blob/master/Screen%20Shot%202020-07-30%20at%203.03.53%20PM.png)
+# Budget App - We Keeps
 
 Flatiron School Module 3 Group Project. 
 
 ## Project Details
 
-Budget App is a single page web application that allows a user to:
+We Keeps is a single page budget web application that allows a user to:
 
 1. Create an account and store the user information
 2. Log into an account with username
