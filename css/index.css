@@ -30,18 +30,32 @@ body{
 .nav-bar {
     position: fixed;
     flex-direction: row;
-    justify-content: space-evenly;
     color: white;
     padding-top: 10px;
-    height: 30px;
+    height: auto;
     width:100%;
     margin-bottom: 10px;
-    background-color: rgba(0,0,0);
+    background-image: url("cropped-StockSnap_OR7D4PANCK.jpg");
 }
 .nav-bar div{
     cursor: pointer;
 }
-
+#nav-buttons{
+    display: flex;
+    flex-direction:row;
+    justify-content: space-evenly;
+    width: 50%;
+    margin-right: 2%;
+    margin-left:auto;
+}
+#nav-buttons div{
+    padding-top: 20px;
+}
+#logo{
+    font-size: 35px;
+    margin-left: 5%;
+    width:auto;
+}
 
 .body{
     display:flex;
@@ -262,13 +276,19 @@ table{
     table-layout: fixed;
 }
 
-th, td {
-    padding: 15px;
+td {
+    padding: 10px;
     text-align: left;
     border: 1px solid black;
   }
 
+th{
+    padding: 5px;
+    border: 1px solid black;
+    text-align: center;
+}
  
 tr:nth-child(even) {background-color: grey;}
+
 
   
