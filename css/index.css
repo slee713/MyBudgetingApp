@@ -32,10 +32,11 @@ body{
     flex-direction: row;
     color: white;
     padding-top: 10px;
-    height: auto;
+    githeight: auto;
     width:100%;
     margin-bottom: 10px;
     background-image: url("cropped-StockSnap_OR7D4PANCK.jpg");
+    background-attachment: fixed;
 }
 .nav-bar div{
     cursor: pointer;
