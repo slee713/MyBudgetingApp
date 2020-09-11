@@ -304,7 +304,7 @@ function loadUserData(transactions){
     //calculate the percentage of cost spent for that particular category and add to corrent summary line
     for (i=0; i<costs.length; i++){
         let element=document.querySelector(`#${labels[i].split(" & ").join("")}`)
-        element.lastElementChild.innerText = round((costs[i]/budgetTotal)*100, 2)
+        element.lastElementChild.innerText = round((costs[i]/budgetTotal)*100,0)
     }
     
 } 
@@ -474,7 +474,7 @@ editForm.addEventListener("submit", ()=>{
     let newDate = event.target[1].value
     let revisedDate = new Date(newDate)
     let year = revisedDate.getFullYear()
-    let month = revisedDate.getMonth() + 2
+    let month = revisedDate.getMonth() + 1
     let editTransactionModal = document.getElementById("edit-transaction-modal")
     closeModal(editTransactionModal)
     config = {
