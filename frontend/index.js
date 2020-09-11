@@ -529,6 +529,9 @@ deleteUserBtn.addEventListener("click", () => {
         method: "DELETE"
     }
     fetch(url+id, config)
+    let canvas = document.querySelector("canvas")
+    canvas.remove()
+    table.innerHTML = ""
     loginContainer.style.display = "flex"
     navBar.style.display = "none"
     dataContainer.style.display = "none"
