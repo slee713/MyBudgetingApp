@@ -238,7 +238,7 @@ function loadUserData(transactions){
             title:{
                 display: true,
                 text: `Spending Summary - Total: $${summary}`,
-                fonstSize: 70
+                fontSize: 20
             },
             // maintainAspectRatio: false,
             legend:{
