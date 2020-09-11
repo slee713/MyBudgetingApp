@@ -238,7 +238,8 @@ function loadUserData(transactions){
             title:{
                 display: true,
                 text: `Spending Summary - Total: $${summary}`,
-                fontSize: 20
+                fontSize: 30,
+                fontColor: "black",
             },
             // maintainAspectRatio: false,
             legend:{
@@ -273,8 +274,8 @@ function loadUserData(transactions){
     labels.forEach(l => createOption(l))
 
     //resets the inner span element for the summary page to 0 so old data is removed
-    let total = document.querySelector("#period-total")
-    total.lastElementChild.innerText=summary
+    // let total = document.querySelector("#period-total")
+    // total.lastElementChild.innerText=summary
     let monthlyBudgetForm = document.querySelector("#set-monthly-budget")
     let travel = document.querySelector("#Travel")
     travel.lastElementChild.innerText = "0"
@@ -352,8 +353,10 @@ function addTableRow(transaction){
     let editBtn = document.createElement("button")
     editBtn.innerText = "Edit"
     editBtn.setAttribute("data-modal-target","#edit-transaction-modal")
+    editBtn.className = "edit"
     let deleteBtn = document.createElement("button")
     deleteBtn.innerText = "Delete"
+    deleteBtn.className = "delete"
     actionBtns.append(editBtn, deleteBtn)
     tableRow.append(date,category,description, price, actionBtns)
     table.append(tableRow)

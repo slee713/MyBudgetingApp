@@ -1,3 +1,6 @@
+*{
+    font-family: "Helvetica Neue";
+}
 .background{
    position: fixed;
    height: 100%;
@@ -6,9 +9,6 @@
    bottom:0;
    z-index: -1;
    padding-top:0px;
-}
-*{
-    font-family: "Helvetica Neue";
 }
 body{
     padding: 0;
@@ -61,14 +61,16 @@ body{
     border: 1px solid black;
     border-radius: 10px;
     padding: 20px;
+    padding-bottom: 20px;
 }
 #test{
     display:flex;
     flex-direction: row;
     justify-content: space-evenly;
-
 }
-
+#filter-select-container{
+    margin-bottom: 10px;
+}
 #table-container {
     flex-direction: column;
     margin-left: auto;
@@ -80,7 +82,9 @@ body{
 .chart-container{
     height:40%;
     width: 40%;
-    margin-top:20px;
+}
+#chart-container{
+    margin-top: 20px;
 }
 
 .login {
@@ -142,7 +146,10 @@ body{
 
 #summary{
     flex-direction: column;
-    margin-left: 70px;
+    padding-top: 65px;
+}
+#summary span{
+    font-weight:bold;
 }
 
 .modal {
@@ -219,3 +226,49 @@ body{
     margin-left: auto;
     margin-right: auto;
 }
+button{
+    background-color: grey;
+}
+
+
+
+.edit {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: none;
+    font-weight: bold;
+    color: blue;
+}
+
+.delete {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: none;
+    font-weight: bold;
+    color: red;
+}
+
+#table-data{
+    margin-top: 10px;
+}
+table{
+    width: 100%;
+    margin-left:auto;
+    margin-right:auto;
+    border: 1px solid black;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+    border: 1px solid black;
+  }
+
+ 
+tr:nth-child(even) {background-color: grey;}
+
+  
